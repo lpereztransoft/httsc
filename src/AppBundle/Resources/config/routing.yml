@@ -1,0 +1,314 @@
+
+index:
+    path:     /index/index
+    defaults: { _controller: AppBundle:Index:index }
+registra_usuario:
+    path:     /index/registra-usuario
+    defaults: { _controller: AppBundle:Index:registraUsuario }  
+# Usuarios
+listar_usuarios:
+    path:     /index/listar-usuarios
+    defaults: { _controller: AppBundle:HotUsuarios:form_hotusuarios }
+insertar_usuario:
+    path:     /index/insertar-usuario
+    defaults: { _controller: AppBundle:HotUsuarios:insertarUsuario }    
+agregar_usuario:
+    path:     /index/agregar-usuario
+    defaults: { _controller: AppBundle:HotUsuarios:agregarUsuario }
+modificar_usuario:
+    path:     /index/modificar-usuario
+    defaults: { _controller: AppBundle:HotUsuarios:modificarUsuario }
+cambiar_usuario:
+    path:     /index/cambiar-usuario
+    defaults: { _controller: AppBundle:HotUsuarios:cambiarUsuario }
+eliminar_usuario:
+    path:     /index/eliminar-usuario
+    defaults: { _controller: AppBundle:HotUsuarios:eliminarUsuario }
+# Caracteristicas de hoteles
+listar_caracteristica_hotel:
+    path:     /index/listar-caracteristicas-hotel
+    defaults: { _controller: AppBundle:HotCarHotel:form_hotcarhotel }
+
+insertar_caracteristica_hotel:
+    path:     /index/insertar-caracteristica-hotel
+    defaults: { _controller: AppBundle:HotCarHotel:insertarCaracteristicaHotel }
+
+agregar_caracteristica_hotel:
+    path:     /index/agregar-caracteristica-hotel
+    defaults: { _controller: AppBundle:HotCarHotel:agregarCaracteristicaHotel }
+
+modificar_caracteristica_hotel:
+    path:     /index/modificar-caracteristica-hotel
+    defaults: { _controller: AppBundle:HotCarHotel:modificarCaracteristicaHotel }
+cambiar_caracteristica_hotel:
+    path:     /index/cambiar-caracteristica-hotel
+    defaults: { _controller: AppBundle:HotCarHotel:cambiarCaracteristicaHotel }
+elimina_caracteristica_hotel:
+    path:     /index/eliminar-caracteristica-hotel
+    defaults: { _controller: AppBundle:HotCarHotel:eliminarCaracteristicaHotel }
+# Recursos
+listar_recursos:
+    path:     /index/listar-recursos
+    defaults: { _controller: AppBundle:HotRecursos:form_hotrecursos }
+insertar_recursos:
+    path:     /index/insertar-recursos
+    defaults: { _controller: AppBundle:HotRecursos:insertarRecursos }
+agregar_recurso:
+    path:     /index/agregar-recurso
+    defaults: { _controller: AppBundle:HotRecursos:agregarRecurso }
+modificar_recurso:
+    path:     /index/modificar-recursos
+    defaults: { _controller: AppBundle:HotRecursos:modificarRecursos }    
+cambiar_recurso:
+    path:     /index/cambiar-recurso
+    defaults: { _controller: AppBundle:HotRecursos:cambiarRecurso }
+eliminar_recurso:
+    path:     /index/eliminar-recurso
+    defaults: { _controller: AppBundle:HotRecursos:eliminarRecurso }
+ # Roles   
+listar_roles:
+    path:     /index/listar-roles
+    defaults: { _controller: AppBundle:HotRoles:form_hotroles }
+insertar_rol:
+    path:     /index/insertar-rol
+    defaults: { _controller: AppBundle:HotRoles:insertarRol }
+agregar_rol:
+    path:     /index/agregar-rol
+    defaults: { _controller: AppBundle:HotRoles:agregarRol }
+modificar_rol:
+    path:     /index/modificar-rol
+    defaults: { _controller: AppBundle:HotRoles:modificarRol }    
+cambiar_rol:
+    path:     /index/cambiar-rol
+    defaults: { _controller: AppBundle:HotRoles:cambiarRol}
+eliminar_rol:
+    path:     /index/eliminar-rol
+    defaults: { _controller: AppBundle:HotRoles:eliminarRol}
+
+ # Tipos de Habitacion   
+listar_tipos_habitacion:
+    path:     /index/listar-tipos-habitacion
+    defaults: { _controller: AppBundle:HotTiposHabitacion:form_hottiposhab }
+insertar_tipo_habitacion:
+    path:     /index/insertar-tipo-habitacion
+    defaults: { _controller: AppBundle:HotTiposHabitacion:insertarTipoHab }
+agregar_tipo_habitacion:
+    path:     /index/agregar-tipo-habitacion
+    defaults: { _controller: AppBundle:HotTiposHabitacion:agregarTipoHab }
+modificar_tipo_habitacion:
+    path:     /index/modificar-tipo-habitacion
+    defaults: { _controller: AppBundle:HotTiposHabitacion:modificarTipoHab }    
+cambiar_tipo_habitacion:
+    path:     /index/cambiar-tipo-habitacion
+    defaults: { _controller: AppBundle:HotTiposHabitacion:cambiarTipoHab}
+eliminar_tipo_habitacion:
+    path:     /index/eliminar-tipo-habitacion
+    defaults: { _controller: AppBundle:HotTiposHabitacion:eliminarTipoHab}
+
+# Hoteles
+listar_hoteles:
+    path:     /index/listar-hoteles
+    defaults: { _controller: AppBundle:HotHotel:form_hothotel }
+insertar_hotel:
+    path:     /index/insertar-hotel
+    defaults: { _controller: AppBundle:HotHotel:insertarHotel }
+agregar_hotel:
+    path:     /index/agregar-hotel
+    defaults: { _controller: AppBundle:HotHotel:agregarHotel}
+insertar_hotel_usuario:
+    path:     /index/insertar-hotel-usuario
+    defaults: { _controller: AppBundle:HotHotel:insertarHotelUsuario}
+modificar_hotel:
+    path:     /index/modificar-hotel
+    defaults: { _controller: AppBundle:HotHotel:modificarHotel }    
+cambiar_hotel:
+    path:     /index/cambiar-hotel
+    defaults: { _controller: AppBundle:HotHotel:cambiarHotel}
+eliminar_hotel:
+    path:     /index/eliminar-hotel
+    defaults: { _controller: AppBundle:HotHotel:eliminarHotel}
+publicar_hotel:
+    path:     /index/publicar-hotel
+    defaults: { _controller: AppBundle:HotHotel:publicarHotel}
+registrar_hotel:
+    path:     /index/registrar-hotel
+    defaults: { _controller: AppBundle:HotHotel:registrarHotel }    
+# Caracteristicas de Habitacion
+
+listar_caracteristicas_habitacion:
+    path:     /index/listar-caracteristicas-habitacion
+    defaults: { _controller: AppBundle:HotCarHab:listarCaracteristicasHabitacion }
+
+insertar_caracteristica_habitacion:
+    path:     /index/insertar-caracteristica-habitacion
+    defaults: { _controller: AppBundle:HotCarHab:insertarCaracteristicaHabitacion }
+
+agregar_caracteristica_habitacion:
+    path:     /index/agregar-caracteristica-habitacion
+    defaults: { _controller: AppBundle:HotCarHab:agregarCaracteristicaHabitacion }
+
+modificar_caracteristica_habitacion:
+    path:     /index/modificar-caracteristica-habitacion
+    defaults: { _controller: AppBundle:HotCarHab:modificarCaracteristicaHabitacion }
+
+cambiar_caracteristica_habitacion:
+    path:     /index/cambiar-caracteristica-habitacion
+    defaults: { _controller: AppBundle:HotCarHab:cambiarCaracteristicaHabitacion }
+
+eliminar_caracteristica_habitacion:
+    path:     /index/eliminar-caracteristica-habitacion
+    defaults: { _controller: AppBundle:HotCarHab:eliminarCaracteristicaHabitacion }
+
+# Habitaciones
+listar_habitaciones:
+    path:     /index/listar-habitaciones
+    defaults: { _controller: AppBundle:HotHabitaciones:listarHabitaciones }
+
+listar_habitaciones_disponibilidad:
+    path:     index/listar-habitaciones-disponibilidad
+    defaults: { _controller: AppBundle:HotHabitaciones:listarHabitacionesDisponibilidad }
+
+insertar_habitacion:
+    path:     /index/insertar-habitacion
+    defaults: { _controller: AppBundle:HotHabitaciones:insertarHabitacion }
+
+agregar_habitacion:
+    path:     /index/agregar-habitacion
+    defaults: { _controller: AppBundle:HotHabitaciones:agregarHabitacion }
+
+modificar_habitacion:
+    path:     /index/modificar-habitacion
+    defaults: { _controller: AppBundle:HotHabitaciones:modificarHabitacion }
+
+cambiar_habitacion:
+    path:     /index/cambiar-habitacion
+    defaults: { _controller: AppBundle:HotHabitaciones:cambiarHabitacion }
+
+eliminar_habitacion:
+    path:     /index/eliminar-habitacion
+    defaults: { _controller: AppBundle:HotHabitaciones:eliminarHabitacion }
+    
+buscar_disponibilidad:
+    path:     /index/buscar-disponibilidad
+    defaults: { _controller: AppBundle:HotHabitaciones:buscarDisponibilidad }
+calendario:
+    path:     /index/calendario
+    defaults: { _controller: AppBundle:HotHabitaciones:calendario }    
+# Imagenes
+
+listar_imagenes:
+    path:     /index/listar-imagenes
+    defaults: { _controller: AppBundle:HotImagenes:listarImagenes }
+
+insertar_imagen:
+    path:     /index/insertar-imagen
+    defaults: { _controller: AppBundle:HotImagenes:insertarImagen }
+
+agregar_imagen:
+    path:     /index/agregar-imagen
+    defaults: { _controller: AppBundle:HotImagenes:agregarImagen }   
+    
+eliminar_imagenes:
+    path:     /index/eliminar-imagenes
+    defaults: { _controller: AppBundle:HotImagenes:eliminarImagenes }
+
+# Reservas
+listar_reservas:
+    path:     /index/listar-reservas
+    defaults: { _controller: AppBundle:HotHabReservas:listarReservas }
+
+insertar_reserva:
+    path:     /index/insertar-reserva
+    defaults: { _controller: AppBundle:HotHabReservas:insertarReserva }  
+
+agregar_reserva:
+    path:     /index/agregar-reserva
+    defaults: { _controller: AppBundle:HotHabReservas:agregarReserva }
+
+reporte_mensual:
+    path:     /index/reporte-mensual
+    defaults: { _controller: AppBundle:HotHabReservas:reporteMensual }
+
+generar_mensual:
+    path:     /index/generar-mensual
+    defaults: { _controller: AppBundle:HotHabReservas:generarMensual }
+    
+generar_detalle_mensual:
+    path:     /index/generar-detalle-mensual
+    defaults: { _controller: AppBundle:HotHabReservas:generarDetalleMensual }
+reservar_huesped:
+    path:     /index/reservar-Huesped
+    defaults: { _controller: AppBundle:HotHabReservas:reservarHuesped }
+agregar_reserva_huesped:
+    path:     /index/agregar-reserva-Huesped
+    defaults: { _controller: AppBundle:HotHabReservas:agregarReservaHuesped }      
+# Huespedes
+listar_huespedes:
+    path:     /index/listar-huespedes
+    defaults: { _controller: AppBundle:HotHuesped:listarHuespedes }
+                
+# Recursos - Roles    
+listar_recursos_roles:
+    path:     /index/listar-recursos-roles
+    defaults: { _controller: AppBundle:HotRecRol:form_hotrecursos_roles }
+insertar_recursos_roles:
+    path:     /index/insertar-recursos-roles
+    defaults: { _controller: AppBundle:HotRecRol:insertarRecRol }
+
+agregar_recursos_roles:
+    path:     /index/agregar-recursos-roles
+    defaults: { _controller: AppBundle:HotRecRol:agregarRecRol }
+
+modificar_recursos_roles:
+    path:     /index/modificar-recursos-roles
+    defaults: { _controller: AppBundle:HotRecRol:modificarRecRol }
+
+cambiar_recursos_roles:
+    path:     /index/cambiar-recursos-roles
+    defaults: { _controller: AppBundle:HotRecRol:cambiarRecRol }
+
+eliminar_recursos_roles:
+    path:     /index/eliminar-recursos-roles
+    defaults: { _controller: AppBundle:HotRecRol:eliminarRecRol }
+# Login
+validar_login:
+    path:     /index/validar-login
+    defaults: { _controller: AppBundle:HotUsuarios:validarLogin }
+# Reservas Actuales
+listar_reservas_actuales:
+    path:     /index/listar-reservas-actuales
+    defaults: { _controller: AppBundle:HotHabReservas:listarReservasActuales }
+cambiar_estado_reserva:
+    path:     /index/cambiar-estado-reserva
+    defaults: { _controller: AppBundle:HotHabReservas:cambiarEstadoReserva }
+# Contactos
+contactos:
+    path:     /index/contactos
+    defaults: { _controller: AppBundle:HotUsuarios:contactos }
+enviar_correo:
+    path:     /index/enviar-correo
+    defaults: { _controller: AppBundle:HotUsuarios:enviarCorreo }
+# Servicios de Habitacion
+listar_servicios_habitacion:
+    path:     /index/listar-servicios-habitacion
+    defaults: { _controller: AppBundle:HotSerHab:listarServiciosHabitacion }
+
+insertar_servicio_habitacion:
+    path:     /index/insertar-servicio-habitacion
+    defaults: { _controller: AppBundle:HotSerHab:insertarServicioHabitacion }
+
+agregar_servicio_habitacion:
+    path:     /index/agregar-servicio-habitacion
+    defaults: { _controller: AppBundle:HotSerHab:agregarServicioHabitacion }
+
+modificar_servicio_habitacion:
+    path:     /index/modificar-servicio-habitacion
+    defaults: { _controller: AppBundle:HotSerHab:modificarServicioHabitacion }
+
+cambiar_servicio_habitacion:
+    path:     /index/cambiar-servicio-habitacion
+    defaults: { _controller: AppBundle:HotSerHab:cambiarServicioHabitacion }
+
+eliminar_servicio_habitacion:
+    path:     /index/eliminar-servicio-habitacion
+    defaults: { _controller: AppBundle:HotSerHab:eliminarServicioHabitacion }       

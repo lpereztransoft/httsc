@@ -1,0 +1,516 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block navbar_options %}
+<li class="dropdown user user-menu">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">				    	    
+        <strong>{{ usuario }}</strong>               
+	</a>			
+    <ul class="dropdown-menu">
+    	<!-- User image -->
+        <li class="user-header">
+        	<h1><span class="glyphicon glyphicon-user" style="color:white;"></span></h1>       	
+            <p>            	
+            	<strong>{{ usuario }} </strong><br>    
+				<strong>{{ rol }}</strong>            	        	
+            	<small>{{ email }}</small>
+            </p>
+  		</li>        
+        <!-- Menu Footer-->
+        <li class="user-footer">        	
+            <div class="col-xs-12">
+            	<a href="{{ path('index') }}" class="btn btn-danger btn-block">
+            		<strong>
+            			<i class="fa fa-power-off"></i>
+            			&nbsp;&nbsp;&nbsp;Cerrar Sesi&oacute;n
+            		</strong>
+            	</a>
+            </div>
+		</li>
+	</ul>	
+</li>
+
+{% endblock %}
+
+{% block menu_usuario %}
+
+{% if rol == "Administrador General" %}
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>
+	        <li><a href="{{ path('listar_caracteristica_hotel') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Hotel</a></li>                        
+	   	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>
+	        <li><a href="{{ path('listar_caracteristicas_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_tipos_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Tipos de Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_servicios_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Servicios de Habitaci&oacute;n</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_recursos') }}"><i class="fa  fa-arrow-circle-o-right "></i> Recursos</a></li>
+	        <li><a href="{{ path('listar_roles') }}"><i class="fa fa-arrow-circle-o-right"></i> Roles</a></li>
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador_Sistema.pdf" download="Manual_General"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% if rol == "Administrador" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">	    	
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador.pdf" download="Manual_Administrador"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+
+{% endif %}
+
+{% if rol == "Recepcionista" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Recepcionista.pdf" download="Manual_Recepcionista"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% endblock %}
+{% block contenido %}
+
+<div class="row">	
+	<div class="col-md-offset-1 col-md-10">
+		<div class="panel panel-primary">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-2 col-md-1">
+						<span class="glyphicon glyphicon-lamp"></span>
+					</div>
+					<div class="col-xs-10 col-md-11">
+						<strong>REGISTRO HABITACI&Oacute;N</strong>
+					</div>
+				</div>
+			</div><!-- panel-heading -->
+
+			<div class="panel-body">
+				<form role="form" action="{{ path('agregar_habitacion') }}" method="POST" data-toggle="validator">
+					<br>
+					<div class="row">
+						<div class="col-md-12">												
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">1</label>&nbsp;&nbsp;Informaci&oacute;n B&aacute;sica</strong></legend>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="">Habitaci&oacute;n</label>
+											<input type="text" class="form-control" name="habitacion" autocomplete="off" data-error="Rellene este campo" required></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="tipo">Tipo de Habitaci&oacute;n</label>
+											<select class="form-control" id="tipo" name="tipo" data-error="Seleccione una opci&oacute;n" required>
+												<option value=""></option>
+												{% for tipo in tipos %}
+													<option value="{{ tipo.idtiphab }}">{{ tipo.tipdsc }}</option>
+												{% endfor %}
+											</select>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>						
+					</div><!-- class="row" -->
+						
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">2</label>&nbsp;&nbsp;Hu&eacute;spedes</strong></legend>
+								<div class="row">
+									<div class="col-md-3">
+										<div class="form-group has-feedback">
+				  							<label for="personas_mayor">M&aacute;x. Mayores</label>
+				  							<input type="text" class="form-control" id="personas_mayor" name="nromayor" autocomplete="off" pattern="^[1-9]{1,1}$" data-error="Ingrese un n&uacute;mero entre 1 y 9" required>
+				  							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+				  						</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group has-feedback">
+				  							<label for="personas_menor">M&aacute;x. Menores</label>
+				  							<input type="text" class="form-control" id="personas_menor" name="nromenor" autocomplete="off" pattern="^[0-9]{1,1}$" data-error="Ingrese un n&uacute;mero entre 0 y 9" required>
+				  							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+				  						</div>
+									</div>
+									<div class="col-md-offset-1 col-md-4">
+										<div class="form-group has-feedback">
+				  							<label for="tarifa_mayor">Tarifa Diaria </label>
+				  							<div class="input-group">
+				  								<input type="text" class="form-control" id="tarifa_mayor" name="tarifamayor" autocomplete="off" pattern="^[.0-9]{1,}$" data-error="Ingrese un precio" required>
+				  								<span class="input-group-addon">USD</span>
+				  							</div>
+				  							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+				  						</div>
+									</div>
+									<div class="col-md-3 sr-only">
+										<div class="form-group has-feedback">
+				  							<label for="tarifa_menor">Tarifa Diaria </label>
+				  							<div class="input-group">
+				  								<input type="text" class="form-control" id="tarifa_menor" name="tarifamenor" value="0" autocomplete="off" pattern="^[.0-9]{1,}$" data-error="Ingrese un precio" required>
+				  								<span class="input-group-addon">USD</span>
+				  							</div>
+				  							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+				  						</div>
+									</div>
+								</div>						
+							</fieldset>
+						</div>
+					</div><!-- class="row" -->
+						
+					<br>
+					<div class="row">
+						<div class="col-md-8">
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">3</label>&nbsp;&nbsp;Disponibilidad</strong></legend>									
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group has-feedback">
+											<label>Desde</label>
+			               					<div id="desde" class="input-group date" data-provide="datepicker" >
+			               						<div class="input-group-addon">
+				                       				<span class="glyphicon glyphicon-calendar"></span>
+				                       			</div>
+				                   				<input type='text' class="form-control" name="fecha_desde" placeholder="aaaa-mm-dd" autocomplete="off" data-error="Ingrese una fecha con el calendario" required/>
+				                       		</div>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group has-feedback">
+											<label>Hasta</label>
+			               					<div  id="hasta" class='input-group date' data-provide="datepicker">
+			               						<div class="input-group-addon">
+				                       				<span class="glyphicon glyphicon-calendar"></span>
+				                       			</div>
+				                   				<input type='text' class="form-control" name="fecha_hasta" placeholder="aaaa-mm-dd" autocomplete="off" data-error="Ingrese una fecha con el calendario" required/>
+				                       		</div>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+						<div class="col-md-offset-1 col-md-3">
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">4</label>&nbsp;&nbsp;Estado</strong></legend>									
+								<div class="row sr-only">
+									<div class="col-md-12">
+										<div class="radio">
+											<label>
+												<input type="radio" class="si" name="estado" value = "1" checked>Si
+											</label>
+										</div>
+										<div class="radio">
+											<label>
+												<input type="radio" class="no" name="estado" value = "0">No
+											</label>
+										</div>
+									</div>										
+								</div>
+								<div class="row">
+									<div class="col-md-offset-1">
+										<div class="checkbox">
+											<label>
+												<input class="habilitado" data-toggle="toggle" data-style="ios" data-size="large" data-on="Publico" data-off="Privado" type="checkbox" checked>
+											</label>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div><!-- class="row" -->
+					
+					<br>
+			  		<div class="row">
+						<div class="col-md-12">
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">5</label>&nbsp;&nbsp;Caracter&iacute;sticas</strong></legend>														
+								<div class="row">
+									<div class="col-md-offset-9 col-md-3">										
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" id="select_all_car"/><strong id="titulo_marcado_car">Marcar Todo</strong>
+											</label>
+										</div>
+									</div>
+								</div>	
+								<br>											
+								{% set c = 0 %}
+								{% for car in caracteristicas %}
+									{% if c == 0 %}
+										<div class="row">
+											<div class="col-md-3">
+												<div class="checkbox">
+													<label>
+														<input class="select_carateristica" type="checkbox" name="caracteristica[]" value="{{ car.idcarhab }}">{{ car.carhabdsc }}
+													</label>
+												</div>
+											</div>
+											{% set c = c + 1 %}
+									{% else %}
+											<div class="col-md-3">
+												<div class="checkbox">
+													<label>
+														<input class="select_carateristica" type="checkbox" name="caracteristica[]" value="{{ car.idcarhab }}">{{ car.carhabdsc }}
+													</label>
+												</div>
+											</div>
+											{% set c = c + 1 %}
+									{% endif %}
+									{% if c == 4 %}
+										</div><!-- class="row" -->
+										{% set c = 0 %}
+									{% endif %}
+								{% endfor %}
+							</fieldset>
+						</div>
+					</div><!-- class="row" -->
+					
+					<br>				
+			  		<div class="row">
+						<div class="col-md-12">
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">6</label>&nbsp;&nbsp;Servicios Incluidos</strong></legend>
+								<div class="row">
+									<div class="col-md-offset-9 col-md-3">										
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" id="select_all_ser"/><strong id="titulo_marcado_ser">Marcar Todo</strong>
+											</label>
+										</div>
+									</div>
+								</div>	
+								<br>																	
+								{% set c = 0 %}
+								{% for ser in servicios %}
+									{% if c == 0 %}
+										<div class="row">
+											<div class="col-md-3">
+												<div class="checkbox">
+													<label>
+														<input class="select_servicio" type="checkbox" name="servicio[]" value="{{ ser.idserhab }}">{{ ser.serhabdsc }}
+													</label>
+												</div>
+											</div>
+											{% set c = c + 1 %}
+									{% else %}
+											<div class="col-md-3">
+												<div class="checkbox">
+													<label>
+														<input class="select_servicio" type="checkbox" name="servicio[]" value="{{ ser.idserhab }}">{{ ser.serhabdsc }}
+													</label>
+												</div>
+											</div>
+											{% set c = c + 1 %}
+									{% endif %}
+									{% if c == 4 %}
+										</div><!-- class="row" -->
+										{% set c = 0 %}
+									{% endif %}
+								{% endfor %}
+							</fieldset>
+						</div>
+					</div><!-- class="row" -->
+
+					<br>					
+					<div class="col-md-offset-3 col-md-3">													
+						<button id="boton" type="submit" class="btn btn-primary btn-block">REGISTRAR</button>
+					</div>
+					<input name="idHotHotel" id="idHotHotel" value="{{ idHotHotel }}" hidden>
+				</form>				
+					<div class="col-md-3">							
+						<form action="{{ path('listar_habitaciones') }}" method="POST" role="form">								
+							<input name="idHotHotel" id="idHotHotel" value="{{ idHotHotel }}" hidden>																
+							<button type="submit" class="btn btn-primary btn-block">CANCELAR</button>
+						</form>							
+					</div>																														
+			</div><!-- class="panel-body" -->
+		</div>		
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,348 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block contenido %}
+
+<div class="row">
+	<div class="col-md-offset-1 col-md-10">
+		<form role="form" action="{{ path('insertar_hotel_usuario') }}" method="POST" data-toggle="validator">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-2 col-md-1">
+							<span class="glyphicon glyphicon-home"></span>
+						</div>
+						<div class="col-xs-10 col-md-11">
+							<strong>REGISTRAR HOTEL Y USUARIO</strong>
+						</div>
+					</div>
+				</div>
+				{% if error != "" %}
+					<div class="row">
+						<div class="col-md-12">
+						<div class="alert alert-danger alert-dismissible">
+                		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                		<h4><i class="icon fa fa-ban"></i> Error! </h4>
+                			{{error}}
+              			</div>
+					</div>
+					</div>
+				{% endif %}
+				<div class="panel-body">
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<fieldset>
+		  						<legend class="legend-css"><strong><label class="label label-primary">1</label>&nbsp;&nbsp;Informaci&oacute;n B&aacute;sica</strong></legend>
+		  						<div class="row">
+		  							<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="">Hotel</label>
+											<input type="text" class="form-control" name="hotel" autocomplete="off" maxlength="99" data-error="Campo obligatorio (max. 100 caracteres)" required></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="">Categoria</label>
+											<select class="form-control" id="categoria" name="categoria" data-error="Seleccione una opci&oacute;n" required>
+												<option value="">Seleccionar...</option>
+												 <option value="1"> 1 Estrella </option>
+												 <option value="2"> 2 Estrellas </option>
+												 <option value="3"> 3 Estrellas </option>
+												 <option value="4"> 4 Estrellas </option>
+												 <option value="5"> 5 Estrellas </option>
+											</select>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="fono1">Tel&eacute;fono</label>
+											<input type="text" class="form-control" id="fono1" name="telefono" autocomplete="off" maxlength="20" pattern="^[1-9|+]{1}\d{1}[\s|-]?\d{1}[\s|-]?\d{1}[\s|-]?\d{3,}$" data-error="Tel&eacute;fono no v&aacute;lido (max. 20 caracteres)" required></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="fono2">Tel&eacute;fono</label>
+											<input type="text" class="form-control" id="fono2" name="telefono2" autocomplete="off" maxlength="20" pattern="^[1-9|+]{1}\d{1}[\s|-]?\d{1}[\s|-]?\d{1}[\s|-]?\d{3,}$" data-error="Tel&eacute;fono no v&aacute;lido (max. 20 caracteres)"></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="fono3">Tel&eacute;fono</label>
+											<input type="text" class="form-control" id="fono3" name="telefono3" autocomplete="off" maxlength="20" pattern="^[1-9|+]{1}\d{1}[\s|-]?\d{1}[\s|-]?\d{1}[\s|-]?\d{3,}$" data-error="Tel&eacute;fono no v&aacute;lido (max. 20 caracteres)"></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+		  						</div><!-- class="row" -->
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="tipo">Descripci&oacute;n</label>
+											<textarea class="form-control" rows="5" id="descripcion" name="descripcion"></textarea>
+										</div>
+									</div>
+								</div><!-- class="row" -->
+		  					</fieldset>
+						</div>
+					</div>
+
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<fieldset>
+								<a name="ubication"></a>
+		  						<legend class="legend-css"><strong><label class="label label-primary">2</label>&nbsp;&nbsp;Ubicaci&oacute;n</strong></legend>
+		  						<div class="row">
+									<div class="col-md-5">
+										<div class="form-group has-feedback">
+											<label for="">Direcci&oacute;n</label>
+											<input id ="autocomplete" type="text" class="form-control" name="direccion" autocomplete="off" maxlength="149" data-error="Campo obligatorio (max. 150 caracteres)" required></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+											<a id="agregarmapa" href="#ubication">&nbsp;<i class="fa fa-map-marker"></i>&nbsp;&nbsp;Agregar Mapa</a>
+										</div>
+									</div>
+
+		  							<div class="col-md-3">
+		  								<div class="form-group has-feedback">
+		  									<label for="">Localidad: </label>
+		  									<select class="form-control" name="localidad" data-error="Seleccione una opci&oacute;n" required>
+												<option value="">Seleccionar...</option>
+												<option value="CIJ"> Cobija </option>
+												 <option value="CBB"> Cochabamba </option>
+												 <option value="LPB"> La Paz </option>
+												 <option value="ORU"> Oruro </option>
+												 <option value="POI"> Potosi </option>
+												 <option value="VVI"> Santa Cruz </option>
+												 <option value="SRE"> Sucre </option>
+												 <option value="TJA"> Tarija </option>
+												 <option value="TDD"> Trinidad </option>
+												 <option value="UYU"> Uyuni </option>
+											</select>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+			  							</div>
+		  							</div>
+
+		  							<div id="contenedor_coordenadas" class="col-md-3 sr-only">
+		  								<div class="form-group">
+			  								<label for="geolocalizacion">Geolocalizaci&oacute;n: </label>
+			  								<div class="input-group">
+			  									<input type="text" class="form-control" id="geolocalizacion" name="geolocalizacion">
+			  								</div>
+			  							</div>
+		  							</div>
+		  						</div><!-- class="row" -->
+								<div class="row">
+									<div id="contenedor_mapa"class="col-md-offset-2 col-md-8 sr-only">
+										<div id="map"></div>
+									</div>
+								</div>
+
+		 					</fieldset>
+						</div>
+					</div><!-- class="row" -->
+
+					<br>
+					<div class="row">
+						<div class="col-md-6">
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">3</label>&nbsp;&nbsp;Politicas de cancelaci&oacute;n</strong></legend>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "1" checked>48 horas antes con penalidad de una noche de estadia</label>
+										</div>
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "2">72 horas antes con penalidad de una noche de estadia</label>
+										</div>
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "3">48 horas antes con penalidad de reserva completa</label>
+										</div>
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "4">72 horas antes con penalidad de reserva completa</label>
+										</div>
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "5">Perdida de 50% del total de la reserva</label>
+										</div>
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "6">Perdida completa de la reserva</label>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+						<div class="col-md-offset-1 col-md-4">
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">4</label>&nbsp;&nbsp;Estado</strong></legend>
+								<div class="row sr-only">
+									<div class="col-md-3">
+										<div class="radio">
+											<label><input type="radio" class="si" name="estado" value = "1" checked>Si</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" class="no" name="estado" value = "0">No</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-offset-4">
+										<div class="checkbox">
+											<label>
+												<input class="habilitado" data-toggle="toggle" data-style="ios" data-size="large" data-on="Habilitado" data-off="Inhabilitado" type="checkbox" checked>
+											</label>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div><!-- class="row" -->
+
+					<br>
+		  			<div class="row">
+						<div class="col-md-12">
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">5</label>&nbsp;&nbsp;Caracter&iacute;sticas</strong></legend>
+								<div class="row">
+									<div class="col-md-offset-9 col-md-3">										
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" id="select_all_car"/><strong id="titulo_marcado_car">Marcar Todo</strong>
+											</label>
+										</div>
+									</div>
+								</div>	
+								<br>
+								{% set c = 0 %}
+								{% for car in caracteristicas %}
+									{% if c == 0 %}
+										<div class="row">
+											<div class="col-md-3">
+												<div class="checkbox">
+													<label>
+														<input class="select_carateristica" type="checkbox" name="caracteristica[]" value="{{ car.idcarhotel }}">{{ car.carhotdsc }}
+													</label>
+												</div>
+											</div>
+											{% set c = c + 1 %}
+									{% else %}
+											<div class="col-md-3">
+												<div class="checkbox">
+													<label>
+														<input class="select_carateristica" type="checkbox" name="caracteristica[]" value="{{ car.idcarhotel }}">{{ car.carhotdsc }}
+													</label>
+												</div>
+											</div>
+											{% set c = c + 1 %}
+									{% endif %}
+									{% if c == 4 %}
+										</div><!-- class="row" -->
+										{% set c = 0 %}
+									{% endif %}
+								{% endfor %}
+								<br>								
+							</fieldset>
+						</div>
+						</div>
+					<br>
+					<div class="row">
+					<div class="col-md-12">
+						<fieldset>
+							<a name="usuario"></a>
+	  						<legend class="legend-css"><strong><label class="label label-primary">6</label>&nbsp;&nbsp;Datos de usuario</strong></legend>
+	  						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group has-feedback">
+									<label for="usuario">Nombre Completo</label>
+									<input type="text" class="form-control" id="usuario" name="usuario" autocomplete="off" maxlenght="99" data-error="Campo obligatorio (max. 100 caracteres)" required>									
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+									<div class="help-block with-errors error-input"></div>
+								</div>
+							</div>
+							<div class="row">
+							<div class="col-md-4">
+								<div class="form-group has-feedback">
+									<label for="ci">C&eacute;dula de identidad</label>
+									<input type="text" class="form-control" id="ci" name="ci" autocomplete="off" maxlength="9" pattern="^[0-9]{6,9}$" data-error="Ingrese solo d&iacute;gitos (min. 6 max. 9)" required>									
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+									<div class="help-block with-errors error-input"></div>
+								</div>
+							</div>
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-md-6">
+							<div class="form-group has-feedback">
+								<label for="telefono">Tel&eacute;fono</label>
+								<input type="text" class="form-control" id="telefono" name="telefono" autocomplete="off"  maxlength="20" pattern="^[1-9|+]{1}\d{1}[\s|-]?\d{1}[\s|-]?\d{1}[\s|-]?\d{3,}$" data-error="Tel&eacute;fono no v&aacute;lido (max. 20 caracteres)" required>									
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+								<div class="help-block with-errors error-input"></div>
+							</div>
+						</div>
+						<div class="col-md-4">
+						<div class="form-group has-feedback">
+							<label for="nacimiento">Fecha de Nacimiento</label>
+							<div id="nac" class="input-group date" data-provide="datepicker" >
+	                			<div class="input-group-addon">
+		                        	<span class="glyphicon glyphicon-calendar"></span>
+		                        </div>
+		                    	<input type='text' class="form-control" id="nacimiento" name="nacimiento" placeholder="aaaa-mm-dd" autocomplete="off" data-error="Ingrese una fecha con el calendario" required/>
+		                   	</div>
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors"></div>
+							</div>
+						</div>
+						</div>
+						<div class="row">
+						<div class="col-md-6">
+							<div class="form-group has-feedback">
+								<label for="email">Email</label>
+								<input type="email" class="form-control" id="email" name="email" autocomplete="off" maxlenght="70" pattern = "^[a-zA-Z0-9_\-\.~]{2,}@[a-zA-Z0-9_\-\.~]{2,}\.[a-zA-Z]{2,4}$" required>
+								<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+								<div class="help-block with-errors error-input"></div>
+							</div>
+						</div>
+						<div class="col-md-4">
+						<div class="form-group has-feedback">
+							<label for="pswd">Contraseña</label>
+							<input type="password" class="form-control" id="pswd" name="pswd" maxlength="30" pattern="^[a-zA-ZÃ�Ã¡Ã‰Ã©Ã�Ã­Ã“Ã³ÃšÃºÃ‘Ã±Ã¼Ãœ0-9@!#%_\$\*]{6,30}$" data-error="Campo obligatorio (min. 6 y max. 30 caracteres)" required></input>
+							<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+							<div class="help-block with-errors error-input"></div>
+						</div>
+					</div>
+					</div>
+					
+						
+					
+						
+	 					</fieldset>
+					</div>
+				</div><!-- class="row" -->
+				</div><!-- class="row" div panel body -->
+				<br>
+					<div class="row">
+						<div class="col-md-offset-3 col-md-3">
+							<br>
+							<button id="boton" type="submit" class="btn btn-primary btn-block">REGISTRAR</button>
+						</div>
+						<div class="col-md-3">
+							<br>
+							<a href="{{ url('index') }}" class="btn btn-primary btn-block" role="button">CANCELAR</a>
+						</div>
+					</div>
+				</div><!-- class="panel-body" -->
+			</div>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

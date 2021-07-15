@@ -1,0 +1,494 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block navbar_options %}
+<li class="dropdown user user-menu">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <strong>{{ usuario }}</strong>
+	</a>
+    <ul class="dropdown-menu">
+    	<!-- User image -->
+        <li class="user-header">
+        	<h1><span class="glyphicon glyphicon-user" style="color:white;"></span></h1>
+            <p>
+            	<strong>{{ usuario }} </strong><br>
+				<strong>{{ rol }}</strong>
+            	<small>{{ email }}</small>
+            </p>
+  		</li>
+        <!-- Menu Footer-->
+        <li class="user-footer">
+            <div class="col-xs-12">
+            	<a href="{{ path('index') }}" class="btn btn-danger btn-block">
+            		<strong>
+            			<i class="fa fa-power-off"></i>
+            			&nbsp;&nbsp;&nbsp;Cerrar Sesi&oacute;n
+            		</strong>
+            	</a>
+            </div>
+		</li>
+	</ul>
+</li>
+
+{% endblock %}
+
+{% block menu_usuario %}
+
+{% if rol == "Administrador General" %}
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>
+	        <li><a href="{{ path('listar_caracteristica_hotel') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Hotel</a></li>
+	   	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>
+	        <li><a href="{{ path('listar_caracteristicas_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_tipos_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Tipos de Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_servicios_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Servicios de Habitaci&oacute;n</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_recursos') }}"><i class="fa  fa-arrow-circle-o-right "></i> Recursos</a></li>
+	        <li><a href="{{ path('listar_roles') }}"><i class="fa fa-arrow-circle-o-right"></i> Roles</a></li>
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>	
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador_Sistema.pdf" download="Manual_General"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>
+	   	</a>
+	</li>
+{% endif %}
+
+{% if rol == "Administrador" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>	
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador.pdf" download="Manual_Administrador"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>
+	   	</a>
+	</li>
+
+{% endif %}
+
+{% if rol == "Recepcionista" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Recepcionista.pdf" download="Manual_Recepcionista"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>
+	   	</a>
+	</li>
+{% endif %}
+
+{% endblock %}
+
+{% block contenido %}
+
+{% if hoteles|length > 1 %}
+	<div class="row">
+		<div class="col-md-6">
+			<form class="form-inline" action="{{ path('listar_habitaciones') }}" method="POST" role="form" >
+				<div class="form-group">
+					<label for="idHotHotel">Hotel:&nbsp;&nbsp;&nbsp;</label>
+					<select class="form-control" name="idHotHotel" id="idHotHotel">
+						<option value="0"></option>
+						{% for hotel in hoteles %}
+							{% if hotel.idhotel == idHotHotel %}
+								<option value="{{ hotel.idhotel }}" selected="selected" >{{ hotel.hotnombre }}</option>
+							{% else %}
+								<option value="{{ hotel.idhotel }}">{{ hotel.hotnombre }}</option>
+							{% endif %}
+						{% endfor %}
+					</select>
+				</div>
+				<button type="submit" class="btn btn-primary">
+					<i class="fa fa-search"></i>&nbsp;&nbsp;&nbsp;Buscar
+				</button>
+			</form>
+		</div>
+
+		<div class="col-md-1">
+		{% if (insertar == 1) and (listar == 1)%}
+			<form role="form" action="{{ path('insertar_habitacion') }}" method="POST">
+				<input type="hidden" name="idHotHotel" id="idHotHotel" value="{{ idHotHotel }}"></input>
+				<button type="submit" class="btn btn-primary btn-block" title="INSERTAR">
+					<i class="fa fa-plus"></i>
+				</button>
+			</form>
+		{% endif %}
+		</div>
+
+		<div class="col-md-1">
+		{% if (modificar == 1) and (listar == 1)%}
+			<form role="form" action="{{ path('modificar_habitacion') }}" method="POST">
+				<input type="text" name="info_habitacion" hidden/>
+				<input type="text" name="info_habitacion_servicios" hidden>
+				<input type="hidden" name="idHotHotel" id="idHotHotel" value="{{idHotHotel}}"></input>
+				<button type="submit" class="btn btn-primary btn-block" title="MODIFICAR">
+					<i class="fa fa-pencil-square-o"></i>
+				</button>
+			</form>
+		{% endif %}
+		</div>
+
+		<div class="col-md-1">
+		{% if (eliminar == 1) and (listar == 1) %}
+			<button id="eliminacion" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal" title="ELIMINAR">
+				<i class="fa fa-trash" data-toggle="tooltip"></i>
+			</button>
+			<div id="myModal" class="modal fade" role="dialog">
+		  		<div class="modal-dialog">
+		    		<div class="modal-content">
+		    			<div class="modal-header">
+		     				<button type="button" class="close" data-dismiss="modal">&times;</button>
+		        			<h4 class="modal-title">Eliminar</h4>
+		      			</div>
+		      			<div class="modal-body">
+		        			<p>¿Est&aacute; seguro de eliminar el registro?</p>
+		      			</div>
+		      			<div class="modal-footer">
+							<form role="form" action="{{ path('eliminar_habitacion') }}" method="POST">
+								<input type="text" name="id_eliminar" hidden/>
+								<input type="hidden" name="idHotHotel" id="idHotHotel" value="{{idHotHotel}}"></input>
+								<button type="submit" class="btn btn-default">Aceptar</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							</form>
+		      			</div>
+		    		</div>
+		  		</div>
+			</div>
+		{% endif %}
+		</div>
+
+		<div class="col-md-offset-2 col-md-1 text-right">
+			<form role="form" action="{{ path('listar_habitaciones_disponibilidad') }}" method="POST">
+				<input name="idHotel" id="idHotel" value="{{ idHotHotel }}" hidden>
+				<button id="boton" type="submit" class="btn btn-primary btn-block" title="ATR&Aacute;S">
+					<i class="fa fa-mail-reply"></i>
+				</button>
+			</form>
+		</div>
+	</div><!-- class="row"-->
+{% else %}	
+	<div class="row">
+		<div class="col-md-7">
+			{% for hotel in hoteles %}
+				<h2><label class="label label-primary">{{ hotel.hotnombre }}</label></h2>
+			{% endfor %}
+		</div>
+
+		<div class="col-md-1">
+		{% if (insertar == 1) and (listar == 1)%}
+			<form role="form" action="{{ path('insertar_habitacion') }}" method="POST">
+				<h2>
+					<input type="hidden" name="idHotHotel" id="idHotHotel" value="{{ idHotHotel }}"></input>
+					<button type="submit" class="btn btn-primary btn-block" title="INSERTAR">
+						<i class="fa fa-plus"></i>
+					</button>
+				</h2>
+			</form>
+		{% endif %}
+		</div>
+
+		<div class="col-md-1">
+		{% if (modificar == 1) and (listar == 1) %}
+			<form role="form" action="{{ path('modificar_habitacion') }}" method="POST">
+				<h2>
+					<input type="text" name="info_habitacion" hidden/>					
+					<input type="text" name="info_habitacion_servicios" hidden>
+					<input type="hidden" name="idHotHotel" id="idHotHotel" value="{{idHotHotel}}"></input>
+					<button type="submit" class="btn btn-primary btn-block" title="MODIFICAR">
+						<i class="fa fa-pencil-square-o"></i>
+					</button>
+				</h2>
+			</form>
+		{% endif %}
+		</div>
+
+		<div class="col-md-1">
+		{% if (eliminar == 1) and (listar == 1) %}
+			<h2>
+				<button id="eliminacion" type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal" title="ELIMINAR">
+					<i class="fa fa-trash" data-toggle="tooltip"></i>
+				</button>
+			</h2>
+			<div id="myModal" class="modal fade" role="dialog">
+		  		<div class="modal-dialog">
+		    		<div class="modal-content">
+		    			<div class="modal-header">
+		     				<button type="button" class="close" data-dismiss="modal">&times;</button>
+		        			<h4 class="modal-title">Eliminar</h4>
+		      			</div>
+		      			<div class="modal-body">
+		        			<p>¿Est&aacute; seguro de eliminar el registro?</p>
+		      			</div>
+		      			<div class="modal-footer">
+							<form role="form" action="{{ path('eliminar_habitacion') }}" method="POST">
+								<input type="text" name="id_eliminar" hidden/>
+								<input type="hidden" name="idHotHotel" id="idHotHotel" value="{{idHotHotel}}"></input>
+								<button type="submit" class="btn btn-default">Aceptar</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+							</form>
+		      			</div>
+		    		</div>
+		  		</div>
+			</div>
+		{% endif %}
+		</div>
+
+		<div class="col-md-offset-1 col-md-1 text-right">
+			<form role="form" action="{{ path('listar_habitaciones_disponibilidad') }}" method="POST">
+				<h1>
+					<input name="idHotel" id="idHotel" value="{{ idHotHotel }}" hidden>
+					<button id="boton" type="submit" class="btn btn-primary btn-block" title="ATR&Aacute;S">
+						<i class="fa fa-mail-reply"></i>
+					</button>
+				</h1>
+			</form>
+		</div>
+	</div>
+{% endif %}
+
+<br>
+{% if listar == 1 %}
+<div class="table-responsive">
+	<table class="table">
+  		<thead>
+  			<tr class="table-thead">
+  				<th class="text-center"><i class="fa fa-dot-circle-o"></i></th>
+  				<th class="text-center">Habitaci&oacute;n</th>
+  				<th class="text-center">Tipo</th>
+  				<th class="text-center">Mayores<br>Cap. m&aacute;x.</th>
+  				<th class="text-center">Menores<br>Cap. m&aacute;x.</th>
+  				<th class="text-center">Tarifa Diaria<br>(USD)</th>
+  				<th class="text-center sr-only">Tarifa Diaria<br>(USD)</th>
+  				<th class="text-center sr-only">Detalle</th>
+  				<th class="text-center sr-only">Servicios</th>
+  				<th class="text-center">Desde</th>
+  				<th class="text-center">Hasta</th>
+  				<th class="text-center">Estado</th>
+  				<th class="text-center">Reserva(s)</th>
+  			</tr>
+  		</thead>
+  		<tbody>
+  			{% for hab in habitaciones %}
+  				<tr>
+  					<td align="center"><input class="seleccion text-center" type="radio" id ="{{ hab.idhabitacion }}" name="habitacion" value="{{ hab.idhabitacion }}"></td>
+  					<td class="habitacion text-center">{{ hab.habdsc }}</td>
+  					<td class="tipo text-center" id="{{ hab.idtiphab }}">{{ hab.habtipo }}</td>
+  					<td class="maxmayor text-center">{{ hab.habmaxmayor }}</td>
+  					<td class="maxmenor text-center">{{ hab.habmaxmenor }}</td>
+  					<td class="tarifamayor text-center">{{ hab.habtarifamayor }}</td>
+  					<td class="tarifamenor text-center sr-only">{{ hab.habtarifamenor }}</td>
+  					<td class="detalle sr-only">{% for caracteristica in hab.habcaracteristicas %}{{ caracteristica }}<br>{% endfor %}</td>
+  					<td class="servicio sr-only">{% for servicio in hab.habservicios %}{{ servicio }}<br>{% endfor %}</td>
+  					<td class="desde text-center">{{ hab.habfecdesde }}</td>
+					<td class="hasta text-center">{{ hab.habfechasta }}</td>
+					<td class="estado text-center">
+						{% if hab.habestado == 1 %}
+							<span class="label label-success">P&uacute;blico</span>
+						{% else %}
+							<span class="label label-danger">Privado</span>
+						{% endif %}						
+					</td>														
+					<td class="text-center">
+						{% if hab.habcantidadreservas > 0 %}
+							<form role="form" action="{{ path('listar_reservas') }}" method="POST">
+								<input type="text" name="info_reserva" value="{{ hab.idhabitacion }}|{{ hab.habdsc }}|{{ hab.habtipo}}|{{ hab.idhothotel}}" hidden/>
+								<button type="submit" class="btn btn-primary btn-block">
+									<i class="fa fa-mail-forward"></i>
+									&nbsp;&nbsp;Ver
+								</button>
+							</form>
+						{% endif %}
+					</td>
+  				</tr>
+
+  				<tr>
+  					<td></td>
+  					<td class="text-center"><label class="label label-default">CARACTER&Iacute;STICAS:</label></td>
+  					<td colspan="7" class="text-justify">  												
+						{% for caracteristica in hab.habcaracteristicas %}
+							<label class="label" style="background-color:#2D7A0F; color:white;">{{ caracteristica }}</label>
+						{% endfor %}
+  					</td>
+  				</tr>
+  				  				
+  				<tr class="table-separator">
+  					<td></td>
+	  				<td class="text-center"><label class="label label-default">SERVICIOS INCLUIDOS:</label></td>
+	  				<td colspan="7" class="text-justify">	  				
+						{% for servicio in hab.habservicios %}
+							<label class="label label-info">{{ servicio }}</label>
+						{% endfor %}
+  					</td>  					
+  				</tr>  		
+  						  				  				
+  			{% endfor %}
+  		</tbody>
+	</table>
+</div>
+{% endif %}
+
+
+{% endblock %}

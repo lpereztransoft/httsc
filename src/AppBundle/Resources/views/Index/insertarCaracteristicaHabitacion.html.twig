@@ -1,0 +1,281 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block navbar_options %}
+<li class="dropdown user user-menu">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">				    	    
+        <strong>{{ usuario }}</strong>               
+	</a>			
+    <ul class="dropdown-menu">
+    	<!-- User image -->
+        <li class="user-header">
+        	<h1><span class="glyphicon glyphicon-user" style="color:white;"></span></h1>       	
+            <p>            	
+            	<strong>{{ usuario }} </strong><br>    
+				<strong>{{ rol }}</strong>            	        	
+            	<small>{{ email }}</small>
+            </p>
+  		</li>        
+        <!-- Menu Footer-->
+        <li class="user-footer">        	
+            <div class="col-xs-12">
+            	<a href="{{ path('index') }}" class="btn btn-danger btn-block">
+            		<strong>
+            			<i class="fa fa-power-off"></i>
+            			&nbsp;&nbsp;&nbsp;Cerrar Sesi&oacute;n
+            		</strong>
+            	</a>
+            </div>
+		</li>
+	</ul>	
+</li>
+
+{% endblock %}
+{% block menu_usuario %}
+
+{% if rol == "Administrador General" %}
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>
+	        <li><a href="{{ path('listar_caracteristica_hotel') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Hotel</a></li>                        
+	   	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>
+	        <li class="active"><a href="{{ path('listar_caracteristicas_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_tipos_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Tipos de Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_servicios_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Servicios de Habitaci&oacute;n</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_recursos') }}"><i class="fa  fa-arrow-circle-o-right "></i> Recursos</a></li>
+	        <li><a href="{{ path('listar_roles') }}"><i class="fa fa-arrow-circle-o-right"></i> Roles</a></li>
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador_Sistema.pdf" download="Manual_General"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+	<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% if rol == "Administrador" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">	    	
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador.pdf" download="Manual_Administrador"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+	<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+
+{% endif %}
+
+{% if rol == "Recepcionista" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>	
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Recepcionista.pdf" download="Manual_Recepcionista"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+	<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% endblock %}
+
+{% block contenido %}
+
+<br><br><br>
+<div class="row">
+	<div class="col-md-offset-3 col-md-6">
+		<form role="form" action="{{ path('agregar_caracteristica_habitacion') }}" method="POST" data-toggle="validator">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-md-2">
+							<span class="glyphicon glyphicon-lamp"></span>
+						</div>
+						<div class="col-md-10">
+							<strong>Caracter&iacute;sticas de la Habitaci&oacute;n</strong>
+						</div>
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="form-group has-feedback">
+						<label for="caracteristica">Caracter&iacute;stica:</label>
+						<input type="text" class="form-control" id="caracteristica" name="caracteristica" autocomplete="off" pattern="^[-/A-z0-9áéíóúÁÉÍÓÚ ]{1,99}$" data-error="Letras, -, / y n&uacute;meros son v&aacute;lidos (max. 100 caracteres)" required>
+						<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+						<div class="help-block with-errors"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<button type="submit" class="btn btn-primary btn-block">Insertar</button>
+						</div>
+						<div class="col-md-6">
+							<a href="{{ path('listar_caracteristicas_habitacion') }}" class="btn btn-primary btn-block">Cancelar</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

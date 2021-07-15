@@ -1,0 +1,596 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block navbar_options %}
+<li class="dropdown user user-menu">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <strong>{{ usuario }}</strong>
+	</a>
+    <ul class="dropdown-menu">
+    	<!-- User image -->
+        <li class="user-header">
+        	<h1><span class="glyphicon glyphicon-user" style="color:white;"></span></h1>
+            <p>
+            	<strong>{{ usuario }} </strong><br>
+				<strong>{{ rol }}</strong>
+            	<small>{{ email }}</small>
+            </p>
+  		</li>
+        <!-- Menu Footer-->
+        <li class="user-footer">
+            <div class="col-xs-12">
+            	<a href="{{ path('index') }}" class="btn btn-danger btn-block">
+            		<strong>
+            			<i class="fa fa-power-off"></i>
+            			&nbsp;&nbsp;&nbsp;Cerrar Sesi&oacute;n
+            		</strong>
+            	</a>
+            </div>
+		</li>
+	</ul>
+</li>
+
+{% endblock %}
+
+{% block menu_usuario %}
+
+{% if rol == "Administrador General" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>
+	        <li><a href="{{ path('listar_caracteristica_hotel') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Hotel</a></li>                        
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>
+	        <li><a href="{{ path('listar_caracteristicas_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_tipos_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Tipos de Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_servicios_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Servicios de Habitaci&oacute;n</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_recursos') }}"><i class="fa  fa-arrow-circle-o-right "></i> Recursos</a></li>
+	        <li><a href="{{ path('listar_roles') }}"><i class="fa fa-arrow-circle-o-right"></i> Roles</a></li>
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador_Sistema.pdf" download="Manual_General"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% if rol == "Administrador" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">	    	
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador.pdf" download="Manual_Administrador"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+
+{% endif %}
+
+{% if rol == "Recepcionista" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Recepcionista.pdf" download="Manual_Recepcionista"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% endblock %}
+
+{% block contenido %}
+
+<div class="row">
+	<div class="col-md-offset-1 col-md-10">
+		<form role="form" action="{{ path('agregar_hotel') }}" method="POST" data-toggle="validator">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+					<div class="row">
+						<div class="col-xs-2 col-md-1">
+							<span class="glyphicon glyphicon-home"></span>
+						</div>
+						<div class="col-xs-10 col-md-11">
+							<strong>REGISTRO HOTEL</strong>
+						</div>
+					</div>
+				</div>
+				{% if error != "" %}
+					<div class="row">
+						<div class="col-md-12">
+						<div class="alert alert-danger alert-dismissible">
+                		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+                		<h4><i class="icon fa fa-ban"></i> Error! </h4>
+                			{{error}}
+              			</div>
+					</div>
+					</div>
+				{% endif %}
+				<div class="panel-body">
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<fieldset>
+		  						<legend class="legend-css"><strong><label class="label label-primary">1</label>&nbsp;&nbsp;Informaci&oacute;n B&aacute;sica</strong></legend>
+		  						<div class="row">
+		  							<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="">Hotel</label>
+											<input type="text" class="form-control" name="hotel" autocomplete="off" maxlength="99" data-error="Campo obligatorio (max. 100 caracteres)" required></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="">Categoria</label>
+											<select class="form-control" id="categoria" name="categoria" data-error="Seleccione una opci&oacute;n" required>
+												<option value="">Seleccionar...</option>
+												 <option value="1"> 1 Estrella </option>
+												 <option value="2"> 2 Estrellas </option>
+												 <option value="3"> 3 Estrellas </option>
+												 <option value="4"> 4 Estrellas </option>
+												 <option value="5"> 5 Estrellas </option>
+											</select>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="fono1">Tel&eacute;fono</label>
+											<input type="text" class="form-control" id="fono1" name="telefono" autocomplete="off" maxlength="20" pattern="^[1-9|+]{1}\d{1}[\s|-]?\d{1}[\s|-]?\d{1}[\s|-]?\d{3,}$" data-error="Tel&eacute;fono no v&aacute;lido (max. 20 caracteres)" required></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="fono2">Tel&eacute;fono</label>
+											<input type="text" class="form-control" id="fono2" name="telefono2" autocomplete="off" maxlength="20" pattern="^[1-9|+]{1}\d{1}[\s|-]?\d{1}[\s|-]?\d{1}[\s|-]?\d{3,}$" data-error="Tel&eacute;fono no v&aacute;lido (max. 20 caracteres)"></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="fono3">Tel&eacute;fono</label>
+											<input type="text" class="form-control" id="fono3" name="telefono3" autocomplete="off" maxlength="20" pattern="^[1-9|+]{1}\d{1}[\s|-]?\d{1}[\s|-]?\d{1}[\s|-]?\d{3,}$" data-error="Tel&eacute;fono no v&aacute;lido (max. 20 caracteres)"></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+		  						</div><!-- class="row" -->
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="tipo">Descripci&oacute;n</label>
+											<textarea class="form-control" rows="5" id="descripcion" name="descripcion"></textarea>
+										</div>
+									</div>
+								</div><!-- class="row" -->
+		  					</fieldset>
+						</div>
+					</div>
+					<br>
+					
+					<div class="row">
+						<div class="col-md-12">
+							<fieldset>
+		  						<legend class="legend-css"><strong><label class="label label-primary">2</label>&nbsp;&nbsp;Cuenta Bancaria</strong></legend>
+		  						<div class="row">
+								    
+									<div class="col-md-3">
+		  								<div class="form-group has-feedback">
+		  									<label for="">Tipo de producto: </label>
+		  									<select class="form-control" name="tipo" data-error="Seleccione una opci&oacute;n" required>
+												<option value="">Seleccionar...</option>
+												<option value="CA"> Caja de Ahorro </option>
+												<option value="CC"> Cuenta Corriente </option>
+											</select>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+			  							</div>
+		  							</div>
+									
+		  							<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="">N&uacute;mero de cuenta</label>
+											<input type="text" class="form-control" name="cuenta" autocomplete="off" maxlength="99" data-error="Campo obligatorio (max. 100 caracteres)" required></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+									
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="">Nombre del abonado</label>
+											<input type="text" class="form-control" name="abonado" autocomplete="off" maxlength="99" data-error="Campo obligatorio (max. 100 caracteres)" required></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+									
+									<div class="col-md-3">
+		  								<div class="form-group has-feedback">
+		  									<label for="">Tipo de documento: </label>
+		  									<select class="form-control" name="tipodoc" data-error="Seleccione una opci&oacute;n" required>
+												<option value="">Seleccionar...</option>
+												<option value="CI"> Carnet De Identidad </option>
+												<option value="CE"> Carnet De Extranjero </option>
+												<option value="NIT"> Numero de Identificacion Tributaria </option>
+												<option value="PA"> Pasaporte </option>
+												<option value="OT"> Otro </option>
+											</select>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+			  							</div>
+		  							</div>
+									
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="">N&uacute;mero de documento</label>
+											<input type="text" class="form-control" name="documento" autocomplete="off" maxlength="99" data-error="Campo obligatorio (max. 100 caracteres)" required></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+										</div>
+									</div>
+									
+									<div class="col-md-4">
+										<div class="form-group has-feedback">
+											<label for="">Complemento documento</label>
+											<input type="text" class="form-control" name="complemento" autocomplete="off" maxlength="99"></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+										</div>
+									</div>
+									
+								</div><!-- class="row" -->
+		  					</fieldset>
+						</div>
+					</div>
+					
+					<br>
+					<div class="row">
+						<div class="col-md-12">
+							<fieldset>
+								<a name="ubication"></a>
+		  						<legend class="legend-css"><strong><label class="label label-primary">3</label>&nbsp;&nbsp;Ubicaci&oacute;n</strong></legend>
+		  						<div class="row">
+									<div class="col-md-5">
+										<div class="form-group has-feedback">
+											<label for="">Direcci&oacute;n</label>
+											<input id ="autocomplete" type="text" class="form-control" name="direccion" autocomplete="off" maxlength="149" data-error="Campo obligatorio (max. 150 caracteres)" required></input>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors error-input"></div>
+											<a id="agregarmapa" href="#ubication">&nbsp;<i class="fa fa-map-marker"></i>&nbsp;&nbsp;Agregar Mapa</a>
+										</div>
+									</div>
+
+		  							<div class="col-md-3">
+		  								<div class="form-group has-feedback">
+		  									<label for="">Localidad: </label>
+		  									<select class="form-control" name="localidad" data-error="Seleccione una opci&oacute;n" required>
+												<option value="">Seleccionar...</option>
+												<option value="CIJ"> Cobija </option>
+												 <option value="CBB"> Cochabamba </option>
+												 <option value="LPB"> La Paz </option>
+												 <option value="ORU"> Oruro </option>
+												 <option value="POI"> Potosi </option>
+												 <option value="VVI"> Santa Cruz </option>
+												 <option value="SRE"> Sucre </option>
+												 <option value="TJA"> Tarija </option>
+												 <option value="TDD"> Trinidad </option>
+												 <option value="UYU"> Uyuni </option>
+											</select>
+											<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+											<div class="help-block with-errors"></div>
+			  							</div>
+		  							</div>
+
+		  							<div id="contenedor_coordenadas" class="col-md-3 sr-only">
+		  								<div class="form-group">
+			  								<label for="geolocalizacion">Geolocalizaci&oacute;n: </label>
+			  								<div class="input-group">
+			  									<input type="text" class="form-control" id="geolocalizacion" name="geolocalizacion">
+			  								</div>
+			  							</div>
+		  							</div>
+		  						</div><!-- class="row" -->
+								<div class="row">
+									<div id="contenedor_mapa"class="col-md-offset-2 col-md-8 sr-only">
+										<div id="map"></div>
+									</div>
+								</div>
+
+		 					</fieldset>
+						</div>
+					</div><!-- class="row" -->
+
+					<br>
+					<div class="row">
+						<div class="col-md-6">
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">4</label>&nbsp;&nbsp;Politicas de cancelaci&oacute;n</strong></legend>
+								<div class="row">
+									<div class="col-md-12">
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "1" checked>48 horas antes con penalidad de una noche de estadia</label>
+										</div>
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "2">72 horas antes con penalidad de una noche de estadia</label>
+										</div>
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "7">24 horas antes con penalidad de reserva completa</label>
+										</div>
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "3">48 horas antes con penalidad de reserva completa</label>
+										</div>
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "4">72 horas antes con penalidad de reserva completa</label>
+										</div>
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "5">Perdida de 50% del total de la reserva</label>
+										</div>
+										<div class="radio">
+										  <label><input type="radio" name="politica" value = "6">Perdida completa de la reserva</label>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+						<div class="col-md-offset-1 col-md-4">
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">5</label>&nbsp;&nbsp;Estado</strong></legend>
+								<div class="row sr-only">
+									<div class="col-md-3">
+										<div class="radio">
+											<label><input type="radio" class="si" name="estado" value = "1" checked>Si</label>
+										</div>
+										<div class="radio">
+											<label><input type="radio" class="no" name="estado" value = "0">No</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-offset-4">
+										<div class="checkbox">
+											<label>
+												<input class="habilitado" data-toggle="toggle" data-style="ios" data-size="large" data-on="Habilitado" data-off="Inhabilitado" type="checkbox" checked>
+											</label>
+										</div>
+									</div>
+								</div>
+							</fieldset>
+						</div>
+					</div><!-- class="row" -->
+
+					<br>
+		  			<div class="row">
+						<div class="col-md-12">
+							<fieldset>
+								<legend class="legend-css"><strong><label class="label label-primary">6</label>&nbsp;&nbsp;Caracter&iacute;sticas</strong></legend>
+								<div class="row">
+									<div class="col-md-offset-9 col-md-3">										
+										<div class="checkbox">
+											<label>
+												<input type="checkbox" id="select_all_car"/><strong id="titulo_marcado_car">Marcar Todo</strong>
+											</label>
+										</div>
+									</div>
+								</div>	
+								<br>
+								{% set c = 0 %}
+								{% for car in caracteristicas %}
+									{% if c == 0 %}
+										<div class="row">
+											<div class="col-md-3">
+												<div class="checkbox">
+													<label>
+														<input class="select_carateristica" type="checkbox" name="caracteristica[]" value="{{ car.idcarhotel }}">{{ car.carhotdsc }}
+													</label>
+												</div>
+											</div>
+											{% set c = c + 1 %}
+									{% else %}
+											<div class="col-md-3">
+												<div class="checkbox">
+													<label>
+														<input class="select_carateristica" type="checkbox" name="caracteristica[]" value="{{ car.idcarhotel }}">{{ car.carhotdsc }}
+													</label>
+												</div>
+											</div>
+											{% set c = c + 1 %}
+									{% endif %}
+									{% if c == 4 %}
+										</div><!-- class="row" -->
+										{% set c = 0 %}
+									{% endif %}
+								{% endfor %}
+								<br>								
+							
+							</fieldset>
+						</div>
+					</div><!-- class="row" -->
+					<br>
+					<div class="row">
+						<div class="col-md-offset-3 col-md-3">
+							<br>
+							<button id="boton" type="submit" class="btn btn-primary btn-block">REGISTRAR</button>
+						</div>
+						<div class="col-md-3">
+							<br>
+							<a href="{{ url('listar_hoteles') }}" class="btn btn-primary btn-block" role="button">CANCELAR</a>
+						</div>
+					</div>
+				</div><!-- class="panel-body" -->
+			</div>
+		</form>
+	</div>
+</div>
+
+{% endblock %}

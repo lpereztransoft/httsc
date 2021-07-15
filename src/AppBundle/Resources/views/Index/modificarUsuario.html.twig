@@ -1,0 +1,447 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block navbar_options %}
+<li class="dropdown user user-menu">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">				    	    
+        <strong>{{ usuario }}</strong>               
+	</a>			
+    <ul class="dropdown-menu">
+    	<!-- User image -->
+        <li class="user-header">
+        	<h1><span class="glyphicon glyphicon-user" style="color:white;"></span></h1>       	
+            <p>            	
+            	<strong>{{ usuario }} </strong><br>    
+				<strong>{{ rol }}</strong>            	        	
+            	<small>{{ email }}</small>
+            </p>
+  		</li>        
+        <!-- Menu Footer-->
+        <li class="user-footer">        	
+            <div class="col-xs-12">
+            	<a href="{{ path('index') }}" class="btn btn-danger btn-block">
+            		<strong>
+            			<i class="fa fa-power-off"></i>
+            			&nbsp;&nbsp;&nbsp;Cerrar Sesi&oacute;n
+            		</strong>
+            	</a>
+            </div>
+		</li>
+	</ul>	
+</li>
+{% endblock %}
+
+{% block menu_usuario %}
+
+{% if rol == "Administrador General" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>
+	        <li><a href="{{ path('listar_caracteristica_hotel') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Hotel</a></li>                        
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>
+	        <li><a href="{{ path('listar_caracteristicas_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_tipos_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Tipos de Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_servicios_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Servicios de Habitaci&oacute;n</a></li>
+	  	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_recursos') }}"><i class="fa  fa-arrow-circle-o-right "></i> Recursos</a></li>
+	        <li><a href="{{ path('listar_roles') }}"><i class="fa fa-arrow-circle-o-right"></i> Roles</a></li>
+	        <li class="active"><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador_Sistema.pdf" download="Manual_General"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% if rol == "Administrador" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">	    	
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador.pdf" download="Manual_Administrador"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+
+{% endif %}
+
+{% if rol == "Recepcionista" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>	
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Recepcionista.pdf" download="Manual_Recepcionista"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% endblock %}
+
+{% block contenido %}
+	<div class="row">
+		<div class="col-lg-offset-3 col-lg-6">
+			<div class="panel panel-primary">
+
+				<div class="panel-heading">
+  					<div class="row">
+  						<div class="col-lg-1">
+  							<span class="glyphicon glyphicon-user"></span>
+  						</div>
+  						<div class="col-lg-11">
+  							<strong>REGISTRO DE USUARIOS</strong>
+  						</div>
+  					</div>
+  				</div>
+				
+  				<div class="panel-body">
+					<form role="form" action="{{ path('cambiar_usuario') }}" method="POST" data-toggle="validator">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group has-feedback">
+									<input type="hidden" name="idUsu" id="idUsu" value={{ idUsu }} />
+									<label for="">Nombre</label>
+									<input type="text" class="form-control" id="usuario" name="usuario" value="{{ usuNombre }}" autocomplete="off" maxlenght="99" data-error="Campo obligatorio (max. 100 caracteres)" required>									
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+									<div class="help-block with-errors error-input"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group has-feedback">
+									<label for="">Cedula de identidad</label>
+									<input type="text" class="form-control" id="ci" name="ci" value="{{ usuCi }}" autocomplete="off" maxlength="9" pattern="^[0-9]{6,9}$" data-error="Ingrese solo d&iacute;gitos (min. 6 max. 9)" required>									
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+									<div class="help-block with-errors error-input"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group has-feedback">
+									<label for="">Telefono</label>
+									<input type="text" class="form-control" id="telefono" name="telefono" value="{{ usuTelefono }}" autocomplete="off" maxlength="20" pattern="^[1-9|+]{1}\d{1}[\s|-]?\d{1}[\s|-]?\d{1}[\s|-]?\d{3,}$" data-error="Tel&eacute;fono no v&aacute;lido (max. 20 caracteres)" required>									
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+									<div class="help-block with-errors error-input"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group has-feedback">
+									<label>Fecha de nacimiento</label>
+									<div id="nac" class="input-group date" data-provide="datepicker" >
+			                			<div class="input-group-addon">
+				                        <span class="glyphicon glyphicon-calendar"></span>
+				                        </div>
+				                    	<input type='text' class="form-control" name="nacimiento" value="{{ usuNacimiento }}" placeholder="aaaa-mm-dd" autocomplete="off" data-error="Ingrese una fecha con el calendario" required/>
+				                        </div>
+										<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+										<div class="help-block with-errors"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group has-feedback">
+									<label for="email">Email</label>
+									<input type="email" class="form-control" id="email" name="email" value="{{ usuEmail }}"autocomplete="off" maxlenght="70" pattern = "^[a-zA-Z0-9_\-\.~]{2,}@[a-zA-Z0-9_\-\.~]{2,}\.[a-zA-Z]{2,4}$" required>
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+									<div class="help-block with-errors error-input"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group has-feedback">
+									<label for="pswd">Contraseña</label>
+									<input type="password" class="form-control" id="pswd" name="pswd" maxlength="30" pattern="^[a-zA-ZÃ�Ã¡Ã‰Ã©Ã�Ã­Ã“Ã³ÃšÃºÃ‘Ã±Ã¼Ãœ0-9@!#%_\$\*]{6,30}$" data-error="Campo obligatorio (min. 6 y max. 30 caracteres)" required></input>
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+									<div class="help-block with-errors error-input"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group has-feedback">
+									<label for="rol">Rol</label>
+									<select class="form-control" id="rol" name="rol" data-error="Seleccione una opci&oacute;n" required>								
+										<option value="">Seleccionar...</option>
+										{% for rol in roles %}
+											{% if rolBD == rol.idrol  %}
+												<option selected="selected" value="{{ rol.idrol }}">{{ rol.roldsc }}</option >
+											{% else %}
+												<option value="{{ rol.idrol }}">{{ rol.roldsc }}</option>
+											{% endif %}			
+										{% endfor %}
+									</select>									
+									<span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+									<div class="help-block with-errors"></div>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<label for="hoteles">Hoteles</label>
+								{% set c = 0 %}
+								{% for hot in hoteles %}
+									{% if c == 0 %}
+										<div class="row">
+											<div class="col-md-6">
+												<div class="checkbox">
+													<label>
+														{% if hot.idHotel in hotelesAcceso %}
+															<input type="checkbox" name="hotel[]" value="{{ hot.idHotel }}" checked>{{ hot.hotnombre }}
+														{% else %}
+															<input type="checkbox" name="hotel[]" value="{{ hot.idHotel }}">{{ hot.hotnombre }}
+														{% endif %}
+													</label>
+												</div>
+											</div>
+											{% set c = c + 1 %}
+									{% else %}
+											<div class="col-md-6">
+												<div class="checkbox">
+													<label>
+													{% if hot.idHotel in hotelesAcceso %}
+														<input type="checkbox" name="hotel[]" value="{{ hot.idHotel }}" checked>{{ hot.hotnombre }}
+													{% else %}
+														<input type="checkbox" name="hotel[]" value="{{ hot.idHotel }}">{{ hot.hotnombre }}
+													{% endif %}
+													</label>
+												</div>
+											</div>
+											{% set c = c + 1 %}
+									{% endif %}
+									{% if c == 2 %}
+										</div><!-- class="row" -->
+										{% set c = 0 %}
+									{% endif %}
+								{% endfor %}
+								{% if c == 1 %}
+									</div>
+								{% endif %}
+							</div>							
+						</div>
+																		
+						<div class="row">							
+							<div class="col-md-3">
+								<label for="">Estado</label>
+								<div class="checkbox">
+									<label>
+										{% if usuEstado == 1 %}
+											<input class="habilitado" data-toggle="toggle" data-style="ios" data-on="Habilitado" data-off="Inhabilitado" type="checkbox" checked>
+										{% else %}
+											<input class="habilitado" data-toggle="toggle" data-style="ios" data-on="Habilitado" data-off="Inhabilitado" type="checkbox">
+										{% endif %}
+									</label>
+								</div>
+							</div>
+						</div>
+						<div class="row sr-only">													
+							<div class="col-md-3">							
+								<div class="radio">
+									<label>
+									{% if usuEstado == 1  %}
+										<input type="radio" class="si" name="habilitado" value = "1" checked="true">Si
+									{% else %}
+										<input type="radio" class="si" name="habilitado" value = "1">Si
+									{% endif %}
+									</label>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="radio">
+									<label>
+									{% if usuEstado == 0  %}
+										<input type="radio" class="no" name="habilitado" value = "0" checked="true">No
+									{% else %}
+										<input type="radio" class="no" name="habilitado" value = "0">No
+									{% endif %}
+									</label>
+								</div>
+							</div>
+						</div>
+												
+						<br>
+						<div class="row">
+							<div class="col-xs-offset-1 col-xs-5 col-md-offset-3 col-md-3">
+								<br>
+								<button id="boton" type="submit" class="btn btn-primary btn-block">MODIFICAR</button>
+							</div>
+							<div class="col-xs-5 col-md-3">
+								<br>
+								<a href="{{ url('listar_usuarios') }}" class="btn btn-primary btn-block" role="button">CANCELAR</a>
+							</div>
+						</div>																			
+					</form>
+				</div>			
+  			</div>
+		</div>
+	</div>
+
+{% endblock %}
+

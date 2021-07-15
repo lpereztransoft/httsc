@@ -1,0 +1,489 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block navbar_options %}
+<li class="dropdown user user-menu">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">				    	    
+        <strong>{{ usuario }}</strong>               
+	</a>			
+    <ul class="dropdown-menu">
+    	<!-- User image -->
+        <li class="user-header">
+        	<h1><span class="glyphicon glyphicon-user" style="color:white;"></span></h1>       	
+            <p>            	
+            	<strong>{{ usuario }} </strong><br>    
+				<strong>{{ rol }}</strong>            	        	
+            	<small>{{ email }}</small>
+            </p>
+  		</li>        
+        <!-- Menu Footer-->
+        <li class="user-footer">        	
+            <div class="col-xs-12">
+            	<a href="{{ path('index') }}" class="btn btn-danger btn-block">
+            		<strong>
+            			<i class="fa fa-power-off"></i>
+            			&nbsp;&nbsp;&nbsp;Cerrar Sesi&oacute;n
+            		</strong>
+            	</a>
+            </div>
+		</li>
+	</ul>	
+</li>
+{% endblock %}
+
+{% block menu_usuario %}
+
+{% if rol == "Administrador General" %}
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>
+	        <li><a href="{{ path('listar_caracteristica_hotel') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Hotel</a></li>                        
+	   	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>
+	        <li><a href="{{ path('listar_caracteristicas_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Habitaci&oacute;n</a></li>
+	        <li class="active"><a href="{{ path('listar_tipos_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Tipos de Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_servicios_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Servicios de Habitaci&oacute;n</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_recursos') }}"><i class="fa  fa-arrow-circle-o-right "></i> Recursos</a></li>
+	        <li><a href="{{ path('listar_roles') }}"><i class="fa fa-arrow-circle-o-right"></i> Roles</a></li>
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador_Sistema.pdf" download="Manual_General"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% if rol == "Administrador" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">	    	
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador.pdf" download="Manual_Administrador"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+
+{% endif %}
+
+{% if rol == "Recepcionista" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Recepcionista.pdf" download="Manual_Recepcionista"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% endblock %}
+{% block javascripts %}
+<script>
+$(document).ready(function() {
+	console.log('idHotel '+$('input[name="idHotel"]').val());
+	var idhotel = $('input[name="idHotel"]').val();
+	var initialLocaleCode = 'es';
+	var mesActual=moment().format("M");
+	console.log('mes '+mesActual);
+	var fechaActual = moment().format("YYYY-MM-DD");
+	//var fechaActual = moment('2017-08-01');
+	$('#calendar').fullCalendar({
+		header: {
+			//left: 'prev,next today',
+			left: '',
+			center: 'title',
+			//right: 'month,agendaWeek,agendaDay,listMonth'
+			//right: 'prev,next today',
+			right: '',
+		},
+		defaultDate: fechaActual,
+		locale: initialLocaleCode,
+		selectable: true,
+		selectHelper: true,
+		select: function(start, end) {
+			var title = confirm('Desea registrar reserva?');
+			console.log('title '+title);
+			if (title) {
+				var inicio = new Date(start);
+				var fin = new Date(end);
+				var theyear = fin.getFullYear();
+				var themonth = fin.getMonth() + 1;
+				var thetoday = fin.getDate();
+
+				console.log('entra '+inicio+' fin '+fin+' asunto '+title);
+				console.log('The date is: '+theyear + "-" + themonth + "-" + thetoday);
+				var fechaInicio = theyear + "-" + themonth + "-" + thetoday;
+				window.location.href = "http://hoteles.transoft.bo/web/app_dev.php/index/buscar-disponibilidad?fechaInicio="+fechaInicio;
+			}
+			$('#calendar').fullCalendar('unselect');
+		},
+		buttonIcons: false, // show the prev/next text
+		weekNumbers: true,
+		navLinks: true, // can click day/week names to navigate views
+		editable: false,
+		eventLimit: true, // allow "more" link when too many events
+		events: function(start, end, timezone, callback) {
+			var newEvent = new Object();
+        	newEvent.title = "some text";
+        	newEvent.start = new Date();
+        	newEvent.allDay = false; 
+		    $.ajax({
+		    	type: "POST",
+		        url: 'http://hoteles.transoft.bo/bin/calendario_reservas.php',
+		        data: { idHotel:idhotel},
+		        dataType: 'json',
+		        success: function(response) {
+		            console.log(response);
+		            for(var i=0;i<Object.keys(response).length;i++){
+		            	console.log(response[i]['title']);
+		            	var eventObject = {
+			            			title: response[i]['title'],
+			    					start: response[i]['start'],
+			    					end: response[i]['end']
+			            			};	
+		            	$('#calendar').fullCalendar('renderEvent', eventObject, true); 
+		            }
+		        }
+		    });
+		    $('#calendar').fullCalendar('addEventSource', newEvent);
+		}
+	});
+	// when the selected option changes, dynamically change the calendar option
+	$('#select').on('change', function() {
+		if (this.value) {
+			$('#calendar').fullCalendar('removeEvents');
+			$('#calendar').fullCalendar( 'gotoDate', moment('2017-'+this.value+'-01') );
+			var newEvent = new Object();
+        	newEvent.title = "some text";
+        	newEvent.start = new Date();
+        	newEvent.allDay = false; 
+        	var eventObject;
+        	//var idHotel=90; 
+		    $.ajax({
+		    	type: "POST",
+		        url: 'http://hoteles.transoft.bo/bin/calendario_reservas.php', 
+		        data: { idHotel:idhotel},
+		        //contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+		        dataType: 'json',
+		        success: function(response) {
+		            console.log(response);
+		            for(var i=0;i<Object.keys(response).length;i++){
+		            	console.log(response[i]['title']);
+		            	eventObject = {
+			            			title: response[i]['title'],
+			    					start: response[i]['start'],
+			    					end: response[i]['end']
+			            			};	
+		            	$('#calendar').fullCalendar('removeEvents');
+		            	$('#calendar').fullCalendar('addEventSource', 'http://hoteles.transoft.bo/bin/calendario_reservas.php?idHotel='+idhotel);
+		            	$('#calendar').fullCalendar('rerenderEvents');            	
+		            }
+		        }
+		    });
+		    $('#calendar').fullCalendar( 'refetchEvents' );
+		}
+		});
+	// build the locale selector's options
+	$.each($.fullCalendar.locales, function(localeCode) { 
+		$('#locale-selector').append(
+			$('<option/>')
+				.attr('value', localeCode)
+				.prop('selected', localeCode == initialLocaleCode)
+				.text(localeCode)
+		);
+	});
+	// when the selected option changes, dynamically change the calendar option
+	$('#locale-selector').on('change', function() {
+		if (this.value) {
+			$('#calendar').fullCalendar('option', 'locale', this.value);
+		}
+	});
+	$.fn.populate = function (mes) {
+	    var $this = $(this);
+	    if(mes == 1){
+	    	$this.append('<option value="1" selected="true">Enero</option>');
+	    }else{
+	    	$this.append('<option value="1">Enero</option>');	
+	    }
+	    if(mes == 2){
+	    	$this.append('<option value="2" selected="true">Febrero</option>');
+	    }else{
+	    	$this.append('<option value="2">Febrero</option>');		
+	    }
+	    if(mes == 3){
+	    	$this.append('<option value="3"  selected="true" >Marzo</option>');
+	    }else{
+	    	$this.append('<option value="3">Marzo</option>');
+	    }
+	    if(mes == 4){
+	    	$this.append('<option value="4"  selected="true">Abril</option>');
+	    }else{
+	    	$this.append('<option value="4">Abril</option>');
+	    }
+	    if(mes == 5){
+	    	$this.append('<option value="5"  selected="true">Mayo</option>');
+	    }else{
+	    	$this.append('<option value="5">Mayo</option>');
+	    }
+	    if(mes == 6){
+	    	$this.append('<option value="6"  selected="true">Junio</option>');
+	    }else{
+	    	$this.append('<option value="6">Junio</option>');
+	    }
+	    if(mes == 7){
+	    	$this.append('<option value="7"  selected="true">Julio</option>');
+	    }else{
+	    	$this.append('<option value="7">Julio</option>');
+	    }
+	    if(mes == 8){
+	    	$this.append('<option value="8"  selected="true">Agosto</option>');
+	    }else{
+	    	$this.append('<option value="8">Agosto</option>');
+	    }
+	    if(mes == 9){
+	    	$this.append('<option value="9"  selected="true">Septiembre</option>');
+	    }else{
+	    	$this.append('<option value="9">Septiembre</option>');
+	    }
+	    if(mes == 10){
+	    	$this.append('<option value="10"  selected="true">Octubre</option>');
+	    }else{
+	    	$this.append('<option value="10">Octubre</option>');
+	    }
+	    if(mes == 11){
+	    	$this.append('<option value="11"  selected="true">Noviembre</option>');
+	    }else{
+	    	$this.append('<option value="11">Noviembre</option>');
+	    }
+	    if(mes == 12){
+	    	$this.append('<option value="12"  selected="true">Diciembre</option>');
+	    }else{
+	    	$this.append('<option value="12">Diciembre</option>');
+	    }
+	}
+	$('#select').populate(mesActual);
+	
+});
+</script>
+<style>
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+#top {
+	background: #eee;
+	border-bottom: 1px solid #ddd;
+	padding: 0 10px;
+	line-height: 40px;
+    font-size: 12px; 
+}
+
+#calendar {
+	max-width: 1000px;
+	margin: 20px auto;
+	padding: 0 10px;
+	font-size: 14px; 
+}
+
+</style>
+{% endblock %}
+{% block contenido %}
+	<div class="row">
+		<div class="col-lg-offset-1 col-lg-10">
+			<div class="panel panel-primary">
+				<div class="panel-heading">
+  					<div class="row">
+  						<div class="col-lg-1">
+  							<span class="glyphicon glyphicon-calendar"></span>
+  						</div>
+  						<div class="col-lg-8">
+  							<strong>HABITACIONES OCUPADAS</strong>
+  						</div>
+  					</div>
+  				</div>
+  				<div id='top'>  				
+  					<div class="col-lg-11">
+  					Mes:
+  					<select id="select"></select>
+  					</div>
+  					<div class="col-lg-1">
+						<h2>
+							<a class="btn btn-block btn-primary" href="{{ path('listar_habitaciones_disponibilidad') }}" title="ATR&Aacute;S">
+								<i class="fa fa-mail-reply"></i>			
+							</a>
+						</h2>
+					</div>	
+  				</div>
+  				<div id='calendar' ui-calendar="uiConfig.calendar" class="span8 calendar" ng-model="eventSources"></div>
+  				</div>
+  				<input type="hidden" name="idHotel" id="idHotel" value="{{hotelId}}" />
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+

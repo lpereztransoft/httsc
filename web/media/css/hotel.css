@@ -1,0 +1,44 @@
+.seleccion_imagen{
+	border-width: 5px;
+	border-style: solid;
+	border-color: blue;
+}
+
+#map{
+	height: 300px;
+}
+
+.panel-buscador{
+	border-width: 4px;
+	border-color: #1570A6;
+}
+.title-buscador{
+	color:#1570A6;
+}
+.legend-css{
+	border-color:#1570A6;
+	color:#1570A6;	
+}
+
+.toggle.ios, .toggle-on.ios, .toggle-off.ios {
+	border-radius: 20px;
+}
+.toggle.ios .toggle-handle {
+	border-radius: 20px;
+}
+
+.table-thead{
+	background-color:green;
+	color:white;		
+}
+.table-separator{
+	border-bottom:solid;
+	border-color:green;
+}
+
+.popover-title {
+	background-color: #73AD21; 
+    color: #FFFFFF; 
+    font-size: 22px;
+    text-align:center;
+}

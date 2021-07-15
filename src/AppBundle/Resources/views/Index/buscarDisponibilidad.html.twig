@@ -1,0 +1,743 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block navbar_options %}
+<li class="dropdown user user-menu">	
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">				    	    
+        <strong>{{ usuario }}</strong>               
+	</a>			
+    <ul class="dropdown-menu">
+    	<!-- User image -->
+        <li class="user-header">
+        	<h1><span class="glyphicon glyphicon-user" style="color:white;"></span></h1>       	
+            <p>            	
+            	<strong>{{ usuario }} </strong><br>    
+				<strong>{{ rol }}</strong>            	        	
+            	<small>{{ email }}</small>
+            </p>
+  		</li>        
+        <!-- Menu Footer-->
+        <li class="user-footer">        	
+            <div class="col-xs-12">
+            	<a href="{{ path('index') }}" class="btn btn-danger btn-block">
+            		<strong>
+            			<i class="fa fa-power-off"></i>
+            			&nbsp;&nbsp;&nbsp;Cerrar Sesi&oacute;n
+            		</strong>
+            	</a>
+            </div>
+		</li>
+	</ul>	
+</li>
+{% endblock %}
+
+{% block menu_usuario %}
+
+{% if rol == "Administrador General" %}
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>
+	        <li><a href="{{ path('listar_caracteristica_hotel') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Hotel</a></li>                        
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>
+	        <li><a href="{{ path('listar_caracteristicas_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_tipos_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Tipos de Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_servicios_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Servicios de Habitaci&oacute;n</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_recursos') }}"><i class="fa fa-arrow-circle-o-right "></i> Recursos</a></li>
+	        <li><a href="{{ path('listar_roles') }}"><i class="fa fa-arrow-circle-o-right"></i> Roles</a></li>
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li class="active"><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador_Sistema.pdf" download="Manual_General"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% if rol == "Administrador" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">	    	
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li class="active"><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador.pdf" download="Manual_Administrador"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+
+{% endif %}
+
+{% if rol == "Recepcionista" %}
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li class="active"><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>	
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Recepcionista.pdf" download="Manual_Recepcionista"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% endblock %}
+{% block javascripts %}
+<script>
+var url_string = window.location.href;
+var url = new URL(url_string);
+var c = url.searchParams.get("fechaInicio");
+console.log(c);
+if(c){
+	$('input[name="fecha_desde"]').val(c);
+}
+</script>
+{% endblock %}
+{% block contenido %}
+
+{% if hoteles|length > 1 %}
+
+<div class="row">
+	<div class="col-md-12">
+		<form action="{{ path('buscar_disponibilidad') }}" method="POST" role="form">								
+			<div class="panel" style="border-color:#1570A6; border-width:4px;">								
+				<div class="panel-body panel-buscador">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="panel-title">
+								<p class="text-center title-buscador">									
+									<strong>B&Uacute;SQUEDA DE HABITACIONES DISPONIBLES</strong>									
+								</p>								
+							</div>						
+						</div>
+					</div>														
+					<div class="row">	
+						<div class="col-md-3">
+							<div class="form-group">
+								<label for="hotel">Hotel:</label>
+								<select class="form-control" name="idHotel" id="idHotel">									
+									{% for hotel in hoteles %}
+										{% if hotel.idhotel == idHotel %}
+											<option value="{{ hotel.idhotel }}" selected>{{ hotel.hotnombre }}</option>
+										{% else %}
+											<option value="{{ hotel.idhotel }}">{{ hotel.hotnombre }}</option>
+										{% endif %}										
+																				
+									{% endfor %}
+								</select>
+							</div>
+						</div>					
+						<div class="col-md-3">
+						 	<div class="form-group">
+								<label for="desde">Desde:</label>
+				               	<div id="desde" class="input-group date" data-provide="datepicker">
+				               		<div class="input-group-addon">
+					                	<span class="glyphicon glyphicon-calendar"></span>
+					              	</div>
+					              	{% if fecha_desde == "" %}
+					                	<input type='text' class="form-control" name="fecha_desde" placeholder="aaaa-mm-dd" autocomplete="off" required/>
+					                {% else %}
+					                	<input type='text' class="form-control" name="fecha_desde" value="{{ fecha_desde }}" placeholder="aaaa-mm-dd" autocomplete="off" required/>
+					                {% endif %}
+					             </div>				
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group has-feedback">
+								<label>Hasta:</label>
+					    		<div id="hasta" class='input-group date' data-provide="datepicker">
+					    			<div class="input-group-addon">
+						    			<span class="glyphicon glyphicon-calendar"></span>
+						   			</div>
+						   			{% if fecha_hasta == "" %}
+						    			<input type='text' class="form-control" name="fecha_hasta" placeholder="aaaa-mm-dd" autocomplete="off" data-error="Ingrese una fecha con el calendario" required/>
+						    		{% else %}
+						    			<input type='text' class="form-control" name="fecha_hasta" value="{{ fecha_hasta }}" placeholder="aaaa-mm-dd" autocomplete="off" data-error="Ingrese una fecha con el calendario" required/>
+						    		{% endif %}
+								</div>				
+							</div>	
+						</div>						
+						
+						<div class="col-md-1">
+							<div class="form-group">
+								<label for="nroadultos">Adulto(s):&nbsp;&nbsp;&nbsp;</label>
+								<select class="form-control" name="nroadultos" id="nroadultos">
+								{% if nroadultos == "" %}
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+								{% else %}
+									{% if nroadultos == 1 %}
+										<option value="1" selected>1</option>
+									{% else %}
+										<option value="1">1</option>
+									{% endif %}
+									{% if nroadultos == 2 %}
+										<option value="2" selected>2</option>
+									{% else %}
+										<option value="2">2</option>
+									{% endif %}
+									{% if nroadultos == 3 %}
+										<option value="3" selected>3</option>
+									{% else %}
+										<option value="3">3</option>
+									{% endif %}
+									{% if nroadultos == 4 %}
+										<option value="4" selected>4</option>
+									{% else %}
+										<option value="4">4</option>
+									{% endif %}
+									{% if nroadultos == 5 %}
+										<option value="5" selected>5</option>
+									{% else %}
+										<option value="5">5</option>
+									{% endif %}
+									{% if nroadultos == 6 %}
+										<option value="6" selected>6</option>
+									{% else %}
+										<option value="6">6</option>
+									{% endif %}
+									{% if nroadultos == 7 %}
+										<option value="7" selected>7</option>
+									{% else %}
+										<option value="7">7</option>
+									{% endif %}
+									{% if nroadultos == 8 %}
+										<option value="8" selected>8</option>
+									{% else %}
+										<option value="8">8</option>
+									{% endif %}
+									{% if nroadultos == 9 %}
+										<option value="9" selected>9</option>
+									{% else %}
+										<option value="9">9</option>
+									{% endif %}
+								{% endif %}
+								</select>
+							</div>	
+						</div>
+						<div class="col-md-1">
+							<div class="form-group">
+								<label for="nromenores">Menor(es):&nbsp;&nbsp;&nbsp;</label>
+								<select class="form-control" name="nromenores" id="nromenores">
+								{% if nromenores == "" %}
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+								{% else %}
+									{% if nromenores == 0 %}
+										<option value="0" selected>0</option>
+									{% else %}
+										<option value="0">0</option>
+									{% endif %}
+									{% if nromenores == 1 %}
+										<option value="1" selected>1</option>
+									{% else %}
+										<option value="1">1</option>
+									{% endif %}
+									{% if nromenores == 2 %}
+										<option value="2" selected>2</option>
+									{% else %}
+										<option value="2">2</option>
+									{% endif %}
+									{% if nromenores == 3 %}
+										<option value="3" selected>3</option>
+									{% else %}
+										<option value="3">3</option>
+									{% endif %}
+									{% if nromenores == 4 %}
+										<option value="4" selected>4</option>
+									{% else %}
+										<option value="4">4</option>
+									{% endif %}
+									{% if nromenores == 5 %}
+										<option value="5" selected>5</option>
+									{% else %}
+										<option value="5">5</option>
+									{% endif %}
+									{% if nromenores == 6 %}
+										<option value="6" selected>6</option>
+									{% else %}
+										<option value="6">6</option>
+									{% endif %}
+									{% if nromenores == 7 %}
+										<option value="7" selected>7</option>
+									{% else %}
+										<option value="7">7</option>
+									{% endif %}
+									{% if nromenores == 8 %}
+										<option value="8" selected>8</option>
+									{% else %}
+										<option value="8">8</option>
+									{% endif %}
+									{% if nromenores == 9 %}
+										<option value="9" selected>9</option>
+									{% else %}
+										<option value="9">9</option>
+									{% endif %}
+								{% endif %}
+								</select>									
+							</div>	
+						</div>						
+						<div class="col-md-1">					
+							<label for="btn" style="color:white;">B&uacute;squeda</label>
+							<button type="submit" id="btn" class="btn btn-primary btn-block" title="Buscar">
+								<i class="fa fa-search"></i>
+							</button>	
+						</div>						
+					</div><!-- class="row" -->														
+				</div><!-- classs="panel-body" -->							
+			</div>			
+		</form>		
+	</div>
+</div><!-- class="row" -->
+	
+{% else %}
+<div class="row">
+	<div class="col-md-offset-1 col-md-10">
+		<form action="{{ path('buscar_disponibilidad') }}" method="POST" role="form">
+			<div class="panel panel-buscador">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel-title">
+							<p class="text-center title-buscador">									
+								<strong>B&Uacute;SQUEDA DE HABITACIONES DISPONIBLES</strong>									
+							</p>								
+						</div>						
+					</div>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-3 sr-only">
+							<div class="form-group">
+								<label for="idHotel">Hotel:</label>								
+								<input type="text" class="form-control" name="idHotel" value="{{ idHotHotel }}">								
+							</div>
+						</div>						
+						<div class="col-md-3">
+						 	<div class="form-group">
+								<label for="desde">Desde:</label>
+				               	<div id="desde" class="input-group date" data-provide="datepicker">
+				               		<div class="input-group-addon">
+					                	<span class="glyphicon glyphicon-calendar"></span>
+					              	</div>
+					              	{% if fecha_desde == "" %}
+					              	<input type='text' class="form-control" name="fecha_desde" placeholder="aaaa-mm-dd" autocomplete="off" required/>
+					              	{% else %}
+					              	<input type='text' class="form-control" name="fecha_desde" value="{{ fecha_desde }}"placeholder="aaaa-mm-dd" autocomplete="off" required/>
+					              	{% endif %}					                
+					             </div>				
+							</div>
+						</div>
+						<div class="col-md-3">
+							<div class="form-group has-feedback">
+								<label>Hasta:</label>
+					    		<div id="hasta" class='input-group date' data-provide="datepicker">
+					    			<div class="input-group-addon">
+						    			<span class="glyphicon glyphicon-calendar"></span>
+						   			</div>
+						   			{% if fecha_hasta == "" %}
+						   			<input type='text' class="form-control" name="fecha_hasta" placeholder="aaaa-mm-dd" autocomplete="off" required/>
+						   			{% else %}
+									<input type='text' class="form-control" name="fecha_hasta" value="{{ fecha_hasta }}"placeholder="aaaa-mm-dd" autocomplete="off" required/>
+						   			{% endif %}						    		
+								</div>				
+							</div>	
+						</div>						
+						
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="nroadultos">Adulto(s):&nbsp;&nbsp;&nbsp;</label>
+								<select class="form-control" name="nroadultos" id="nroadultos">
+								{% if nroadultos == "" %}
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+								{% else %}
+									{% if nroadultos == 1 %}
+										<option value="1" selected>1</option>
+									{% else %}
+										<option value="1">1</option>
+									{% endif %}
+									{% if nroadultos == 2 %}
+										<option value="2" selected>2</option>
+									{% else %}
+										<option value="2">2</option>
+									{% endif %}
+									{% if nroadultos == 3 %}
+										<option value="3" selected>3</option>
+									{% else %}
+										<option value="3">3</option>
+									{% endif %}
+									{% if nroadultos == 4 %}
+										<option value="4" selected>4</option>
+									{% else %}
+										<option value="4">4</option>
+									{% endif %}
+									{% if nroadultos == 5 %}
+										<option value="5" selected>5</option>
+									{% else %}
+										<option value="5">5</option>
+									{% endif %}
+									{% if nroadultos == 6 %}
+										<option value="6" selected>6</option>
+									{% else %}
+										<option value="6">6</option>
+									{% endif %}
+									{% if nroadultos == 7 %}
+										<option value="7" selected>7</option>
+									{% else %}
+										<option value="7">7</option>
+									{% endif %}
+									{% if nroadultos == 8 %}
+										<option value="8" selected>8</option>
+									{% else %}
+										<option value="8">8</option>
+									{% endif %}
+									{% if nroadultos == 9 %}
+										<option value="9" selected>9</option>
+									{% else %}
+										<option value="9">9</option>
+									{% endif %}
+								{% endif %}
+								</select>
+							</div>	
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label for="nromenores">Menor(es):&nbsp;&nbsp;&nbsp;</label>
+								<select class="form-control" name="nromenores" id="nromenores">
+								{% if nromenores == "" %}
+									<option value="0">0</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+								{% else %}
+									{% if nromenores == 0 %}
+										<option value="0" selected>0</option>
+									{% else %}
+										<option value="0">0</option>
+									{% endif %}
+									{% if nromenores == 1 %}
+										<option value="1" selected>1</option>
+									{% else %}
+										<option value="1">1</option>
+									{% endif %}
+									{% if nromenores == 2 %}
+										<option value="2" selected>2</option>
+									{% else %}
+										<option value="2">2</option>
+									{% endif %}
+									{% if nromenores == 3 %}
+										<option value="3" selected>3</option>
+									{% else %}
+										<option value="3">3</option>
+									{% endif %}
+									{% if nromenores == 4 %}
+										<option value="4" selected>4</option>
+									{% else %}
+										<option value="4">4</option>
+									{% endif %}
+									{% if nromenores == 5 %}
+										<option value="5" selected>5</option>
+									{% else %}
+										<option value="5">5</option>
+									{% endif %}
+									{% if nromenores == 6 %}
+										<option value="6" selected>6</option>
+									{% else %}
+										<option value="6">6</option>
+									{% endif %}
+									{% if nromenores == 7 %}
+										<option value="7" selected>7</option>
+									{% else %}
+										<option value="7">7</option>
+									{% endif %}
+									{% if nromenores == 8 %}
+										<option value="8" selected>8</option>
+									{% else %}
+										<option value="8">8</option>
+									{% endif %}
+									{% if nromenores == 9 %}
+										<option value="9" selected>9</option>
+									{% else %}
+										<option value="9">9</option>
+									{% endif %}
+								{% endif %}
+								</select>									
+							</div>	
+						</div>						
+						<div class="col-md-2">
+							<label for="btn" style="color:white;">B&uacute;squeda</label>
+							<button type="submit" id="btn" class="btn btn-primary btn-block" title="Buscar">
+								<i class="fa fa-search"></i>
+							</button>
+						</div>						
+					</div><!-- class="row" -->														
+				</div>							
+			</div>
+		</form>		
+	</div>
+</div>
+
+{% endif %}
+
+{% if habitaciones_disponibles != NULL %}
+<div class="table-responsive">
+	<table class="table table-separator">
+		<thead class="table-thead">
+			<tr>				
+				<th class="text-center">Habitaci&oacute;n</td>
+				<th class="text-center">Tipo Habitaci&oacute;n</td>
+				<th class="text-center">Total Hospedaje (USD)</th>	
+				<th class="text-center">Reservar - H&uacute;esped</td>			
+			</tr>
+		</thead>
+		<tbody>
+		{% for hab in habitaciones_disponibles  %}
+			<tr>			
+				<td class="text-center">{{ hab.habdsc }}</td>
+				<td class="text-center">{{ hab.habtipo }}</td>
+				{% if fecha_desde != "" and fecha_desde != "" %}
+					<td class="text-center">{{ hab.habtarifamayor * cantidad_dias }}</td>				
+				{% endif %}				
+				
+				<td class="text-center">
+	  				<form role="form" action="{{ path('reservar_huesped') }}" method="POST">
+		  				<button type="submit" class="btn btn-primary" data-toggle="tooltip" title="RESERVAR">								
+						<i class="fa fa-list"></i>															
+						</button>
+						<input type="text" name="idhabitacion" value="{{hab.idhabitacion}}" hidden/>
+						<input type="text" name="habdsc" value="{{hab.habdsc}}" hidden/>
+						<input type="text" name="tipo" value="{{hab.habtipo}}" hidden/>
+						<input type="text" name="idHotel" value="{{idHotel}}" hidden/>
+						<input type="text" name="desde" value="{{fecha_desde}}" hidden/>
+						<input type="text" name="hasta" value="{{fecha_hasta}}" hidden/>
+						<input type="text" name="nroadultos" value="{{nroadultos}}" hidden/>
+						<input type="text" name="nromenores" value="{{nromenores}}" hidden/>
+						{% if fecha_desde != "" and fecha_desde != "" %}
+						<input type="text" name="total" value="{{ hab.habtarifamayor * cantidad_dias }}" hidden/>						
+						{% endif %}
+					</form>	
+				</td>				
+			</tr>
+			<tr>  				
+  				<td class="text-center"><label class="label label-default">CARACTER&Iacute;STICAS:</label></td>
+  				<td colspan="2" class="text-justify">
+					{% for caracteristica in hab.habcaracteristicas %}
+						<label class="label" style="background-color:#2D7A0F; color:white;">{{ caracteristica }}</label>
+					{% endfor %}
+  				</td>
+  				<td>
+  				</td>
+  				
+  			</tr>
+  			<tr class="table-separator">
+				<td class="text-center"><label class="label label-default">SERVICIOS INCLUIDOS:</label></td>
+				<td colspan="7" class="text-justify">	  				
+				{% for servicio in hab.habservicios %}
+					<label class="label label-info">{{ servicio }}</label>
+				{% endfor %}
+				</td>  					
+			</tr>
+		{% endfor %}					
+		</tbody>		
+	</table>
+</div>
+{% else %}
+	{% if (idHotel != "") or (fecha_desde != "") or (fecha_hasta != "") %}
+		<div class="row">
+			<div class= "col-md-offset-3 col-md-6">
+				<div class="alert alert-warning alert-dismissible">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i style="color:white;" class="fa fa-close"></i></button>
+		    		<h4 class="text-center"><i class="icon fa fa-exclamation-circle"></i>No hay resultados en esa b&uacute;queda...</h4>		    	    		
+				</div>
+			</div>
+		</div>
+	{% endif %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,428 @@
+{% extends "AppBundle::layout.html.twig" %}
+{% block navbar_options %}
+<li class="dropdown user user-menu">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">				    	    
+        <strong>{{ usuario }}</strong>               
+	</a>			
+    <ul class="dropdown-menu">
+    	<!-- User image -->
+        <li class="user-header">
+        	<h1><span class="glyphicon glyphicon-user" style="color:white;"></span></h1>       	
+            <p>            	
+            	<strong>{{ usuario }} </strong><br>    
+				<strong>{{ rol }}</strong>            	        	
+            	<small>{{ email }}</small>
+            </p>
+  		</li>        
+        <!-- Menu Footer-->
+        <li class="user-footer">        	
+            <div class="col-xs-12">
+            	<a href="{{ path('index') }}" class="btn btn-danger btn-block">
+            		<strong>
+            			<i class="fa fa-power-off"></i>
+            			&nbsp;&nbsp;&nbsp;Cerrar Sesi&oacute;n
+            		</strong>
+            	</a>
+            </div>
+		</li>
+	</ul>	
+</li>
+{% endblock %}
+
+{% block menu_usuario %}
+
+{% if rol == "Administrador General" %}
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>
+	        <li><a href="{{ path('listar_caracteristica_hotel') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Hotel</a></li>                        
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>
+	        <li><a href="{{ path('listar_caracteristicas_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_tipos_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Tipos de Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_servicios_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Servicios de Habitaci&oacute;n</a></li>
+	  	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_recursos') }}"><i class="fa  fa-arrow-circle-o-right "></i> Recursos</a></li>
+	        <li><a href="{{ path('listar_roles') }}"><i class="fa fa-arrow-circle-o-right"></i> Roles</a></li>
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador_Sistema.pdf" download="Manual_General"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+			<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% if rol == "Administrador" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>|	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">	    	
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    <li><a href="/bin/Manual_Hoteles_Nacionales-Administrador.pdf" download="Manual_Administrador"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+			<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+
+{% endif %}
+
+{% if rol == "Recepcionista" %}
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+		
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Recepcionista.pdf" download="Manual_Recepcionista"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+			<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+<style type="text/css">
+.color{
+       background-color: 	#FFFACD;
+}
+</style>
+<script>
+	$(document).ready(function() {
+		$(".boton").click(function() {
+        var id = "";
+        var dsc= "";
+        var rec= "";
+        var list="";
+        var ins="";
+        var mod="";
+        var eli="";
+        var recDsc="";
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".numero").each(function() {
+          id += $(this).html() + "\n";
+        });
+        $(this).parents("tr").find(".dsc").each(function() {
+          dsc += $(this).html() + "\n";
+        });
+        $(this).parents("tr").find(".recursoId").each(function() {
+          rec += $(this).html() + "\n";
+        });
+        $(this).parents("tr").find(".listarId").each(function() {
+          list += $(this).html() + "\n";
+        });
+         $(this).parents("tr").find(".insertarId").each(function() {
+          ins += $(this).html() + "\n";
+        });
+         $(this).parents("tr").find(".modificarId").each(function() {
+          mod += $(this).html() + "\n";
+        });
+         $(this).parents("tr").find(".eliminarId").each(function() {
+          eli += $(this).html() + "\n";
+        });
+         $(this).parents("tr").find(".descripcion").each(function() {
+          recDsc += $(this).html() + "\n";
+        });
+        
+
+        console.log(id+" "+rec);
+        
+        //$('input[name="idRol"]').val(id);
+        $('input[name="idRolEliminar"]').val(id);
+        $('input[name="recDsc"]').val(dsc);
+        $('input[name="idRec"]').val(rec);
+        $('input[name="idListar"]').val(list);
+        $('input[name="idInsertar"]').val(ins);
+        $('input[name="idModificar"]').val(mod);
+        $('input[name="idEliminar"]').val(eli);
+        $('input[name="recDsc"]').val(recDsc);
+        
+        
+      });
+	//$('table').bind('click', function(e) {
+    //$(e.target).closest('tr').children('td,th').css('background-color','#00FF00');
+	  //});
+	 $("table tr").click(function(){
+                   // $(this).toggleClass("color");
+     });
+	});
+</script>
+{% endblock %}
+
+{% block contenido %}
+<div class="row">
+	<div class="col-lg-offset-2 col-lg-7">
+	<div class="panel panel-primary">
+
+				<div class="panel-heading">
+  					<div class="row">
+  						<div class="col-lg-1">
+  							<span class="glyphicon glyphicon-th-list"></span>
+  						</div>
+  						<div class="col-lg-11">
+  							<strong>Recursos</strong>
+  						</div>
+  					</div>
+  				</div>
+  	<div class="panel-body">			
+	<table class="table table-bordered" id="recursos">
+		<thead>
+			<tr>
+				<th>Seleccionar</th>
+				<th>Recurso</th>
+				<th>Listar</th>
+				<th>Insertar</th>
+				<th>Modificar</th>
+				<th>Eliminar</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for rec in recursos %}
+				<tr>
+					<td class="boton"><input type="radio" name="recurso"></input></td>
+					<td class="numero" style="display:none"> {{ rec.hotidrol }}</td>
+					<td class="recursoId" style="display:none"> {{ rec.hotidrec }}</td>
+					<td class="descripcion">{{ rec.recdsc }}</td>
+					<td class="listarId" style="display:none"> {{ rec.listar }}</td>
+					<td class="insertarId" style="display:none"> {{ rec.insertar }}</td>
+					<td class="modificarId" style="display:none"> {{ rec.modificar }}</td>
+					<td class="eliminarId" style="display:none"> {{ rec.eliminar }}</td>
+					{% if rec.listar == 1  %}
+						<td class="listar">Si</td>
+					{% else %}
+						<td class="listar">No</td>
+					{% endif %}
+					{% if rec.insertar == 1  %}
+						<td class="insertar">Si</td>
+					{% else %}
+						<td class="insertar">No</td>
+					{% endif %}
+					{% if rec.modificar == 1  %}
+						<td class="modificar">Si</td>
+					{% else %}
+						<td class="modificar">No</td>
+					{% endif %}
+					{% if rec.eliminar == 1  %}
+						<td class="eliminar">Si</td>
+					{% else %}
+						<td class="eliminar">No</td>
+					{% endif %}
+				</tr>
+
+    		{% endfor %}
+
+		</tbody>
+	</table>
+	<div class="row">
+		<div class="col-xs-6 col-md-4">
+	<form role="form" action="{{ path('insertar_recursos_roles') }}" method="POST">
+	<button type="submit" class="btn btn-primary btn-block">Insertar</button>
+	<input type="hidden" name="idRolInsertar" id="idRolInsertar" value="{{idRol}}" />
+	</form>
+		</div>
+		<div class="col-xs-6 col-md-4">
+	<form role="form" action="{{ path('modificar_recursos_roles') }}" method="POST">	
+	<button type="submit" class="btn btn-primary btn-block">Modificar</button>
+	<input type="hidden" name="idRol" id="idRol" value="{{idRol}}" />
+	<input type="hidden" name="recDsc" id="recDsc" />
+	<input type="hidden" name="idRec" id="idRec" />
+	<input type="hidden" name="idListar" id="idListar" />
+	<input type="hidden" name="idInsertar" id="idInsertar" />
+	<input type="hidden" name="idModificar" id="idModificar" />
+	<input type="hidden" name="idEliminar" id="idEliminar" />
+	<input type="hidden" name="recDsc" id="recDsc" />
+	</form>	
+		</div>	
+		<div class="col-xs-6 col-md-4">
+			<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Eliminar</button>
+		</div>
+	</div>	
+	</div>	
+	</div>	
+</div>
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Eliminar</h4>
+        </div>
+        <div class="modal-body">
+          <p>Esta seguro de eliminar el registro?</p>
+        </div>
+        <div class="modal-footer">
+        	<div class="row">
+			<div class="col-xs-6 col-md-4">
+        	<form role="form" action="{{ path('eliminar_recursos_roles') }}" method="POST">	
+		<button type="submit" class="btn btn-primary btn-block">Aceptar</button>
+		<input type="hidden" name="idRolEliminar" id="idRolEliminar" />
+		<input type="hidden" name="idRec" id="idRec" />
+		</form>	
+		</div>
+		<div class="col-xs-6 col-md-4">
+          <button type="button" class="btn btn-primary btn-block" data-dismiss="modal">Cancelar</button>
+          </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>	
+{% endblock %}
+
+

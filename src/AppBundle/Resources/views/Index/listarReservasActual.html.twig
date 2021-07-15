@@ -1,0 +1,522 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block navbar_options %}
+
+<li class="dropdown user user-menu">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <strong>{{ usuario }}</strong>
+	</a>
+    <ul class="dropdown-menu">
+    	<!-- User image -->
+        <li class="user-header">
+        	<h1><span class="glyphicon glyphicon-user" style="color:white;"></span></h1>
+            <p>
+            	<strong>{{ usuario }} </strong><br>
+				<strong>{{ rol }}</strong>
+            	<small>{{ email }}</small>
+            </p>
+  		</li>
+        <!-- Menu Footer-->
+        <li class="user-footer">
+            <div class="col-xs-12">
+            	<a href="{{ path('index') }}" class="btn btn-danger btn-block">
+            		<strong>
+            			<i class="fa fa-power-off"></i>
+            			&nbsp;&nbsp;&nbsp;Cerrar Sesi&oacute;n            			
+            		</strong>
+            	</a>
+            </div>
+		</li>
+	</ul>
+</li>
+
+{% endblock %}
+{% block menu_usuario %}
+
+{% if rol == "Administrador General" %}
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>
+	        <li><a href="{{ path('listar_caracteristica_hotel') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Hotel</a></li>                        
+	   	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>
+	        <li><a href="{{ path('listar_caracteristicas_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Caracteristicas Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_tipos_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Tipos de Habitaci&oacute;n</a></li>
+	        <li><a href="{{ path('listar_servicios_habitacion') }}"><i class="fa fa-arrow-circle-o-right"></i>Servicios de Habitaci&oacute;n</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_recursos') }}"><i class="fa  fa-arrow-circle-o-right "></i> Recursos</a></li>
+	        <li><a href="{{ path('listar_roles') }}"><i class="fa fa-arrow-circle-o-right"></i> Roles</a></li>
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador_Sistema.pdf" download="Manual_General"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% if rol == "Administrador" %}
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li  class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-user"></i><span>  Administracion permisos</span>                    	
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	 	</a>
+	    <ul class="treeview-menu">	    	
+	        <li><a href="{{ path('listar_usuarios') }}"><i class="fa fa-arrow-circle-o-right"></i> Usuarios</a></li>
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-calendar"></i><span>   Reportes</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>                		
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('reporte_mensual') }}"><i class="fa  fa-arrow-circle-o-right "></i> Mensual</a></li>
+	   	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Administrador.pdf" download="Manual_Administrador"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+
+{% endif %}
+
+{% if rol == "Recepcionista" %}
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-building-o"></i><span>  Hoteles</span>
+	    	<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+		</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="{{ path('listar_hoteles') }}"><i class="fa fa-arrow-circle-o-right"></i> Lista de Hoteles</a></li>	                                
+	   	</ul>
+	</li>
+	<li class="active treeview">
+		<a href="#">
+	    	<i class="fa fa-hotel"></i><span>  Habitaciones</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	        </span>
+	    </a>
+	    <ul class="treeview-menu">
+	    	<li class="active"><a href="{{ path('listar_habitaciones_disponibilidad') }}"><i class="fa fa-arrow-circle-o-right"></i>Lista de Habitaciones</a></li>	        
+	  	</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+			<i class="fa fa-search"></i><span>   B&uacute;squedas</span>
+			<span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	      	</span>
+		</a>
+		<ul class="treeview-menu">
+			<li><a href="{{ path('buscar_disponibilidad') }}"><i class="fa  fa-arrow-circle-o-right "></i> Habitacion Disponible</a></li>	
+		</ul>
+	</li>
+	<li class="treeview">
+		<a href="#">
+	    	<i class="fa fa-download"></i><span>   Descargas</span>
+	        <span class="pull-right-container">
+	        	<i class="fa fa-angle-left pull-right"></i>
+	       	</span>
+	 	</a>
+	    <ul class="treeview-menu">
+	    	<li><a href="/bin/Manual_Hoteles_Nacionales-Recepcionista.pdf" download="Manual_Recepcionista"><i class="fa  fa-arrow-circle-o-right "></i> Manual</a></li>
+	   	</ul>
+	</li>   
+	<li class="treeview">
+		<a href="{{ path('contactos') }}">
+			<i class="fa fa-envelope"></i><span>   Contacto</span>                		
+	   	</a>                	
+	</li>
+{% endif %}
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+	$(document).ready(function() {
+		$(".boton").click(function() {
+        var idReserva = "";
+        // Obtenemos todos los valores contenidos en los <td> de la fila
+        // seleccionada
+        $(this).parents("tr").find(".idreserva").each(function() {
+          idReserva += $(this).html() + "\n";
+        });
+        console.log(idReserva);
+        $('input[name="reserva"]').val(idReserva);
+        
+      });
+	 $("table tr").click(function(){
+                    //$(this).toggleClass("color");
+     });
+	});
+</script>
+{% endblock %}
+
+
+{% block contenido %}
+
+<div class="row">
+	<div class="col-md-offset-3 col-md-5">
+		<h2 align="center">
+			<label class="label label-primary">
+				Habitaci&oacute;n: {{ nombrehabitacion }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				Tipo: {{ tipohabitacion }}
+			</label>
+		</h2>
+	</div>
+	<div class="col-md-offset-1 col-md-3">
+		<form role="form" action="{{ path('listar_reservas') }}" method="POST">
+			<br>
+			<br>
+			<button type="submit" class="btn btn-primary btn-xs">
+				<input type="text" name="info_reserva" value="{{ idhabitacion }}|{{ nombrehabitacion }}|{{ tipohabitacion }}|{{idHotel}}" hidden/>								
+				<i class="fa fa-calendar"></i>															
+				&nbsp;&nbsp;Historico
+			</button>							
+		</form>
+	</div>
+</div>
+<br>
+
+<div class="table-responsive">
+<table class="table table-striped table-separator table-condensed">
+    <thead>
+        <tr class="table-thead">
+            <th class="text-center sr-only"><i class="fa  fa-dot-circle-o"></i></th>
+            <th>Fecha Ingreso</th>
+            <th>Fecha Salida</th>
+            <th>C&oacute;digo de Reserva</th>
+            <th class="text-center">Total de Reserva <br>(USD)</th>
+            <th>Estado</th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for reserva in reservas %}
+        	<tr>
+                <td align="center" class="sr-only"><input class="seleccion_reserva" type="radio" id ="{{ reserva.idreserva }}" name="reserva" value="{{ reserva.idreserva }}"></td>
+                <td align="center" class="idreserva sr-only">{{ reserva.idreserva }}</td>                
+                <td class="text-center">{{ reserva.revfechaingreso }}</td>
+                <td>{{ reserva.revfechasalida }}</td>
+                <td>{{ reserva.revcodigoreserva }}</td>
+                <td class="text-center">{{ reserva.revmontoreserva }}</td>
+                <td>
+                    {% if reserva.revestado == 1 %}
+                        Reservado
+                    {% endif %}
+                    {% if reserva.revestado == 2 %}
+                        Anulado
+                    {% endif %}
+                    {% if reserva.revestado == 3 %}
+                        Reservado Por Hotel
+                    {% endif %}
+                    {% if reserva.revestado == 4 %}
+                        Check in
+                    {% endif %}
+                    {% if reserva.revestado == 5 %}
+                    	Chek out
+                    {% endif %} 
+                    {% if reserva.revestado == 6 %}
+                    	No show
+                    {% endif %} 
+                    {% if reserva.revestado == 7 %}
+                    	Anulado por Hotel
+                    {% endif %}                                       
+                </td>
+                {% if reserva.revestado == 1%}
+                <td>              
+                	<div class="raw">  	
+	                	<form role="form" action="{{ path('cambiar_estado_reserva') }}" method="POST">	                	
+	                		<input type="text" name="habitacion" value="{{ idhabitacion }}" hidden/>
+							<input type="text" name="reserva" value="{{ reserva.idreserva }}" hidden/>
+							<input type="text" name="nombrehabitacion" value="{{ nombrehabitacion }}" hidden/>
+							<input type="text" name="tipohabitacion" value="{{ tipohabitacion }}" hidden/>
+							<input type="text" name="estado" value="4" hidden/>								
+							<input type="hidden" name="idHotel" id="idHotel" value="{{idHotel}}" />												
+							<div class="col-md-12">
+								<button type="submit" class="btn btn-success btn-block btn-xs">								
+									Check in
+								</button>
+							</div>								
+						</form>
+					</div>
+                </td> 
+                <td>  
+                	<div class="raw">              	
+	                	<button type="button" class="boton btn btn-info btn-block btn-xs" data-toggle="modal" data-target="#myModal">
+							Check Out
+						</button>
+					</div>
+                </td> 
+                <td>         
+                	<div class="raw">       	
+	                	<form role="form" action="{{ path('cambiar_estado_reserva') }}" method="POST">
+							<input type="text" name="habitacion" value="{{ idhabitacion }}" hidden/>
+							<input type="text" name="reserva" value="{{ reserva.idreserva }}" hidden/>
+							<input type="text" name="nombrehabitacion" value="{{ nombrehabitacion }}" hidden/>
+							<input type="text" name="tipohabitacion" value="{{ tipohabitacion }}" hidden/>
+							<input type="text" name="estado" value="6" hidden/>
+							<input type="hidden" name="idHotel" id="idHotel" value="{{idHotel}}" />
+							<div class="col-md-12">																					
+								<button type="submit" class="btn btn-warning btn-block btn-xs">								
+									No show
+								</button>					
+							</div>		
+						</form>
+					</div>
+                </td> 
+                <td>         
+                	<div class="raw">       	
+	                	<form role="form" action="{{ path('cambiar_estado_reserva') }}" method="POST">
+							<input type="text" name="habitacion" value="{{ idhabitacion }}" hidden/>
+							<input type="text" name="reserva" value="{{ reserva.idreserva }}" hidden/>
+							<input type="text" name="nombrehabitacion" value="{{ nombrehabitacion }}" hidden/>
+							<input type="text" name="tipohabitacion" value="{{ tipohabitacion }}" hidden/>
+							<input type="text" name="estado" value="7" hidden/>
+							<input type="hidden" name="idHotel" id="idHotel" value="{{idHotel}}" />
+							<div class="col-md-12">																				
+								<button type="submit" class="btn btn-danger  btn-block btn-xs">								
+									Anular
+								</button>
+							</div>								
+						</form>
+					</div>	
+                </td>
+                <td>          
+                	{% if reserva.revcantidadhuespedes > 0 %}
+                	<div class="raw">                		
+	                	<form role="form" action="{{ path('listar_huespedes') }}" method="POST">
+	                		<input type="text" name="idhabitacion" value="{{ idhabitacion }}" hidden/>
+							<input type="text" name="info_reserva" value="{{ reserva.idreserva }}|{{ reserva.revfechaingreso }}|{{ reserva.revfechasalida }}|{{ reserva.revcodigoreserva }}|{{ nombrehabitacion }}|{{ tipohabitacion }}|{{ reserva.revmontoreserva }}|{{idHotel}}" hidden/>
+							<div class="col-md-12">
+								<button type="submit" class="btn btn-primary btn-block btn-xs">								
+									Hu&eacute;sped(es)
+								</button>				
+							</div>			
+						</form>
+					</div>
+					{% endif %}
+                </td> 
+                {% endif %}
+                
+                {% if reserva.revestado == 2 or reserva.revestado == 5 or reserva.revestado == 6 %}
+                <td>                	
+                	{% if reserva.revcantidadhuespedes > 0 %}
+                	<div class="raw">
+		               	<form role="form" action="{{ path('listar_huespedes') }}" method="POST">
+		               		<input type="text" name="idhabitacion" value="{{ idhabitacion }}" hidden/>
+							<input type="text" name="info_reserva" value="{{ reserva.idreserva }}|{{ reserva.revfechaingreso }}|{{ reserva.revfechasalida }}|{{ reserva.revcodigoreserva }}|{{ nombrehabitacion }}|{{ tipohabitacion }}|{{ reserva.revmontoreserva }}|{{idHotel}}" hidden/>
+							<div class="col-md-12">
+								<button type="submit" class="btn btn-primary btn-block btn-xs">								
+									Hu&eacute;sped(es)
+								</button>
+							</div>							
+						</form>
+					</div>
+					{% endif %}
+                </td>
+                {% endif %}
+                
+                {% if reserva.revestado == 4 %}
+                <td>   
+                	<div class="raw">              	
+	                	<button type="button" class="boton btn btn-info btn-block btn-xs" data-toggle="modal" data-target="#myModal">
+							Check Out
+						</button>
+					</div>
+                </td> 
+                <td>                	
+                	{% if reserva.revcantidadhuespedes > 0 %}
+                	<div class="raw">  	
+	                	<form role="form" action="{{ path('listar_huespedes') }}" method="POST">
+	                		<input type="text" name="idhabitacion" value="{{ idhabitacion }}" hidden/>
+							<input type="text" name="info_reserva" value="{{ reserva.idreserva }}|{{ reserva.revfechaingreso }}|{{ reserva.revfechasalida }}|{{ reserva.revcodigoreserva }}|{{ nombrehabitacion }}|{{ tipohabitacion }}|{{ reserva.revmontoreserva }}|{{idHotel}}" hidden/>
+							<div class="col-md-12">							
+								<button type="submit" class="btn btn-primary btn-block btn-xs">								
+									Hu&eacute;sped(es)
+								</button>
+							</div>							
+						</form>
+					</div>
+					{% endif %}
+               	</td> 
+                {% endif %}
+            </tr>
+        {% endfor %}
+
+    </tbody>
+</table>
+</div><!-- class="table-responsive" -->
+
+<br>
+<div class="row">
+    <div class = "col-md-2">
+        <form role="form" action="{{ path('insertar_reserva') }}" method="POST">            
+            <input type="text" name="idHabitacion" id="idHabitacion" value="{{ idhabitacion }}" hidden></input>
+            <input type="text" name="nombreHabitacion" id="nombreHabitacion" value="{{ nombrehabitacion }}" hidden></input>
+            <input type="text" name="tipoHabitacion" id="tipoHabitacion" value="{{ tipohabitacion }}" hidden></input>
+            <input type="text" name="idHotel" id="idHotel" value="{{ idHotel }}" hidden></input>
+            <button type="submit" class="btn btn-primary btn-block btn-xs">Bloquear Fechas</button>
+        </form>
+    </div>
+    <div class = "col-md-2">
+		<form role="form" action="{{ path('listar_habitaciones_disponibilidad') }}" method="POST">	
+			<button type="submit" class="btn btn-primary btn-block btn-xs">
+				<span class="glyphicon glyphicon-arrow-left"></span>
+				&nbsp;&nbsp;&nbsp;&nbsp;Atras
+			</button>
+			<input type="hidden" name="idHotel" id="idHotel" value="{{idHotel}}" />
+			<input type="hidden" name="hotelNombre" id="hotelNombre" />
+		</form>			
+	</div>    
+</div>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">    
+    	<!-- Modal content-->
+      	<div class="modal-content">
+        	<div class="modal-header">
+          		<button type="button" class="close" data-dismiss="modal">&times;</button>
+          		<h4 class="modal-title">Check Out</h4>
+        	</div>
+        	<div class="modal-body">
+          		<p>Esta seguro de modificar la habitaci&oacute;n a Check out?</p>
+        	</div>
+        	<div class="modal-footer">
+        		<div class="row">
+					<div class="col-xs-6 col-md-4">
+        				<form role="form" action="{{ path('cambiar_estado_reserva') }}" method="POST">	
+							<button type="submit" class="btn btn-default">Aceptar</button>
+							<input type="text" name="habitacion" value="{{ idhabitacion }}" hidden/>
+							<input type="text" name="reserva" hidden/>
+							<input type="text" name="nombrehabitacion" value="{{ nombrehabitacion }}" hidden/>
+							<input type="text" name="tipohabitacion" value="{{ tipohabitacion }}" hidden/>
+							<input type="text" name="estado" value="5" hidden/>
+							<input type="hidden" name="idHotel" id="idHotel" value="{{idHotel}}" />
+						</form>	
+					</div>
+					<div class="col-xs-6 col-md-4">
+          				<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          			</div>
+          		</div>
+        	</div>
+      	</div>
+	</div>
+</div>  	
+	
+{% endblock %}
