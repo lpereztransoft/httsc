@@ -15,8 +15,8 @@ class conexionDB{
 		$this->data_base_type = 'mysql';
 		$this->host = 'localhost';
 		$this->data_base_name = 'transoft_hoteles';
-		$this->user = 'hoteles';
-		$this->password = 'hyjebasu5';
+		$this->user = 'root';
+		$this->password = 'mysql';
 	}
 
 	public function conectar(){
